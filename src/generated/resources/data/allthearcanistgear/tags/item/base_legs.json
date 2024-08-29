@@ -1,0 +1,11 @@
+{
+  "values": [
+    "ars_nouveau:arcanist_leggings",
+    "ars_nouveau:sorcerer_leggings",
+    "ars_nouveau:battlemage_leggings",
+    {
+      "id": "#allthearcanistgear:elemental_legs",
+      "required": false
+    }
+  ]
+}

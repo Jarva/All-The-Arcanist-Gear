@@ -1,0 +1,11 @@
+{
+  "values": [
+    "ars_nouveau:arcanist_hood",
+    "ars_nouveau:sorcerer_hood",
+    "ars_nouveau:battlemage_hood",
+    {
+      "id": "#allthearcanistgear:elemental_hat",
+      "required": false
+    }
+  ]
+}
