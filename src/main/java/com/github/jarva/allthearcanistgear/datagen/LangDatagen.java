@@ -17,10 +17,10 @@ public class LangDatagen extends LanguageProvider {
 
         for (ArmorSet set : AddonItemRegistry.ARMOR_SETS) {
             String localizedName = set.getName().substring(0, 1).toUpperCase() + set.getName().substring(1);
-            this.add("item.allthearcanistgear." + set.getName() + "_hat", localizedName + " Arcanist's Hat");
-            this.add("item.allthearcanistgear." + set.getName() + "_robes", localizedName + " Arcanist's Robes");
-            this.add("item.allthearcanistgear." + set.getName() + "_leggings", localizedName + " Arcanist's Leggings");
-            this.add("item.allthearcanistgear." + set.getName() + "_boots", localizedName + " Arcanist's Boots");
+            this.add("item.allthearcanistgear." + set.getName() + "_hat", localizedName + " Arcanist Hat");
+            this.add("item.allthearcanistgear." + set.getName() + "_robes", localizedName + " Arcanist Robes");
+            this.add("item.allthearcanistgear." + set.getName() + "_leggings", localizedName + " Arcanist Leggings");
+            this.add("item.allthearcanistgear." + set.getName() + "_boots", localizedName + " Arcanist Boots");
         }
     }
 }

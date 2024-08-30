@@ -12,6 +12,6 @@ public class AddonIngredientTypeRegistry {
     public static final DeferredRegister<IngredientType<?>> INGREDIENT_TYPES = DeferredRegister.create(NeoForgeRegistries.Keys.INGREDIENT_TYPES, AllTheArcanistGear.MODID);
 
     public static final Supplier<IngredientType<PerkTierIngredient>> PERK_TIER = INGREDIENT_TYPES.register("perk_tier",
-            () -> new IngredientType<PerkTierIngredient>(PerkTierIngredient.CODEC, PerkTierIngredient.STREAM_CODEC)
+            () -> new IngredientType<>(PerkTierIngredient.CODEC, PerkTierIngredient.STREAM_CODEC)
     );
 }

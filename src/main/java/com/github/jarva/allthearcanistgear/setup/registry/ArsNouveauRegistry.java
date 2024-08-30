@@ -7,7 +7,6 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class ArsNouveauRegistry {
