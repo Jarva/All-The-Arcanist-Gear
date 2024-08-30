@@ -3,6 +3,8 @@ package com.github.jarva.allthearcanistgear.datagen;
 import alexthw.ars_elemental.common.items.armor.ArmorSet;
 import alexthw.ars_elemental.registry.ModItems;
 import com.github.jarva.allthearcanistgear.AllTheArcanistGear;
+import com.github.jarva.allthearcanistgear.common.armor.ArcanistArmorSet;
+import com.github.jarva.allthearcanistgear.setup.registry.AddonItemRegistry;
 import com.hollingsworth.arsnouveau.setup.registry.ItemsRegistry;
 import com.thevortex.allthemodium.registry.ModRegistry;
 import net.minecraft.core.HolderLookup;
@@ -96,6 +98,25 @@ public class ItemTagDatagen extends IntrinsicHolderTagsProvider<Item> {
 
         this.tag(UNOBTAINIUM_INGOT)
                 .addOptional(key(ModRegistry.UNOBTAINIUM_INGOT.get()));
+
+        for (ArcanistArmorSet arcanistArmorSet : AddonItemRegistry.ARMOR_SETS) {
+            addArmorTags(arcanistArmorSet);
+        }
+    }
+
+    public void addArmorTags(ArcanistArmorSet set) {
+        tag(ItemTags.ARMOR_ENCHANTABLE).add(set.getHat(), set.getChest(), set.getLegs(), set.getBoots());
+        tag(ItemTags.EQUIPPABLE_ENCHANTABLE).add(set.getHat(), set.getChest(), set.getLegs(), set.getBoots());
+        tag(ItemTags.DURABILITY_ENCHANTABLE).add(set.getHat(), set.getChest(), set.getLegs(), set.getBoots());
+
+        tag(ItemTags.HEAD_ARMOR_ENCHANTABLE).add(set.getHat());
+        tag(ItemTags.HEAD_ARMOR).add(set.getHat());
+        tag(ItemTags.CHEST_ARMOR_ENCHANTABLE).add(set.getChest());
+        tag(ItemTags.CHEST_ARMOR).add(set.getChest());
+        tag(ItemTags.LEG_ARMOR_ENCHANTABLE).add(set.getLegs());
+        tag(ItemTags.LEG_ARMOR).add(set.getLegs());
+        tag(ItemTags.FOOT_ARMOR_ENCHANTABLE).add(set.getBoots());
+        tag(ItemTags.FOOT_ARMOR).add(set.getBoots());
     }
 
     public ResourceLocation key(Item item) {

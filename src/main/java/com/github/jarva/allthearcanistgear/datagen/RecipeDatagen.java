@@ -1,7 +1,7 @@
 package com.github.jarva.allthearcanistgear.datagen;
 
 import com.github.jarva.allthearcanistgear.AllTheArcanistGear;
-import com.github.jarva.allthearcanistgear.common.armor.ArmorSet;
+import com.github.jarva.allthearcanistgear.common.armor.ArcanistArmorSet;
 import com.github.jarva.allthearcanistgear.common.recipes.PerkTierIngredient;
 import com.github.jarva.allthearcanistgear.setup.registry.AddonItemRegistry;
 import net.minecraft.core.HolderLookup;
@@ -12,7 +12,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
-import net.neoforged.neoforge.common.crafting.ICustomIngredient;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -29,7 +28,7 @@ public class RecipeDatagen extends RecipeProvider implements IConditionBuilder {
         smithing(withATM, AddonItemRegistry.UNOBTAINIUM, ItemTagDatagen.UNOBTAINIUM_SMITHING_TEMPLATE, AddonItemRegistry.VIBRANIUM, ItemTagDatagen.UNOBTAINIUM_INGOT);
     }
 
-    private void smithing(RecipeOutput output, ArmorSet set, TagKey<Item> template, TagKey<Item> modifier) {
+    private void smithing(RecipeOutput output, ArcanistArmorSet set, TagKey<Item> template, TagKey<Item> modifier) {
         ICondition elementalLoaded = modLoaded("ars_elemental");
 
         RecipeOutput withElemental = output.withConditions(elementalLoaded);
@@ -49,7 +48,7 @@ public class RecipeDatagen extends RecipeProvider implements IConditionBuilder {
         return tier > 0 ? new PerkTierIngredient(base, tier).toVanilla() : Ingredient.of(base);
     }
 
-    private void smithing(RecipeOutput output, ArmorSet set, TagKey<Item> template, ArmorSet base, TagKey<Item> modifier) {
+    private void smithing(RecipeOutput output, ArcanistArmorSet set, TagKey<Item> template, ArcanistArmorSet base, TagKey<Item> modifier) {
         smithing(output, set.getHat(), template, base.getHat(), modifier);
         smithing(output, set.getChest(), template, base.getChest(), modifier);
         smithing(output, set.getLegs(), template, base.getLegs(), modifier);

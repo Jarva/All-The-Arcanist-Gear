@@ -7,7 +7,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 
-public class ArmorSet {
+public class ArcanistArmorSet {
     private final ItemRegistryWrapper<Item> head;
     private final ItemRegistryWrapper<Item> chest;
     private final ItemRegistryWrapper<Item> legs;
@@ -16,7 +16,7 @@ public class ArmorSet {
     private final int tier;
     private final ArmorSetConfig config;
 
-    public ArmorSet(ArmorSetConfig config, int tier) {
+    public ArcanistArmorSet(ArmorSetConfig config, int tier) {
         this.config = config;
         this.name = config.name();
         this.tier = tier;
