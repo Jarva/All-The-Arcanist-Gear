@@ -18,6 +18,7 @@ import net.neoforged.neoforge.common.crafting.ICustomIngredient;
 import net.neoforged.neoforge.common.crafting.IngredientType;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
 import java.util.stream.Stream;
 
 public class PerkTierIngredient implements ICustomIngredient {
@@ -50,7 +51,7 @@ public class PerkTierIngredient implements ICustomIngredient {
             if (data == null) return null;
             is.set(DataComponentRegistry.ARMOR_PERKS, data.setTier(minLevel));
             return is;
-        });
+        }).filter(Objects::nonNull);
     }
 
     @Override

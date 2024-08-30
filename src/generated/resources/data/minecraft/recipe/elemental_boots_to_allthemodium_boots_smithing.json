@@ -14,8 +14,6 @@
     "tag": "c:ingots/allthemodium"
   },
   "base": {
-    "type": "allthearcanistgear:perk_tier",
-    "min_level": 2,
     "tag": "allthearcanistgear:elemental_boots"
   },
   "result": {

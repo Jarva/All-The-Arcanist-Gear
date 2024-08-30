@@ -33,16 +33,20 @@ public class RecipeDatagen extends RecipeProvider implements IConditionBuilder {
         ICondition elementalLoaded = modLoaded("ars_elemental");
 
         RecipeOutput withElemental = output.withConditions(elementalLoaded);
-        smithing(withElemental, set.getHat(), template, ItemTagDatagen.ELEMENTAL_HAT, modifier);
-        smithing(withElemental, set.getChest(), template, ItemTagDatagen.ELEMENTAL_CHEST, modifier);
-        smithing(withElemental, set.getLegs(), template, ItemTagDatagen.ELEMENTAL_LEGS, modifier);
-        smithing(withElemental, set.getBoots(), template, ItemTagDatagen.ELEMENTAL_BOOTS, modifier);
+        smithing(withElemental, set.getHat(), template, ItemTagDatagen.ELEMENTAL_HAT, modifier, 0);
+        smithing(withElemental, set.getChest(), template, ItemTagDatagen.ELEMENTAL_CHEST, modifier, 0);
+        smithing(withElemental, set.getLegs(), template, ItemTagDatagen.ELEMENTAL_LEGS, modifier, 0);
+        smithing(withElemental, set.getBoots(), template, ItemTagDatagen.ELEMENTAL_BOOTS, modifier, 0);
 
         RecipeOutput withoutElemental = output.withConditions(not(elementalLoaded));
-        smithing(withoutElemental, set.getHat(), template, ItemTagDatagen.BASE_HAT, modifier);
-        smithing(withoutElemental, set.getChest(), template, ItemTagDatagen.BASE_CHEST, modifier);
-        smithing(withoutElemental, set.getLegs(), template, ItemTagDatagen.BASE_LEGS, modifier);
-        smithing(withoutElemental, set.getBoots(), template, ItemTagDatagen.BASE_BOOTS, modifier);
+        smithing(withoutElemental, set.getHat(), template, ItemTagDatagen.BASE_HAT, modifier, 3);
+        smithing(withoutElemental, set.getChest(), template, ItemTagDatagen.BASE_CHEST, modifier, 3);
+        smithing(withoutElemental, set.getLegs(), template, ItemTagDatagen.BASE_LEGS, modifier, 3);
+        smithing(withoutElemental, set.getBoots(), template, ItemTagDatagen.BASE_BOOTS, modifier, 3);
+    }
+
+    private Ingredient minTier(TagKey<Item> base, int tier) {
+        return tier > 0 ? new PerkTierIngredient(base, tier).toVanilla() : Ingredient.of(base);
     }
 
     private void smithing(RecipeOutput output, ArmorSet set, TagKey<Item> template, ArmorSet base, TagKey<Item> modifier) {
@@ -62,13 +66,17 @@ public class RecipeDatagen extends RecipeProvider implements IConditionBuilder {
         ).unlocks(AllTheArcanistGear.MODID + ":has_" + modifier.location().getPath() + "_ingot", has(modifier)).save(output, getItemName(armor) + "_smithing");
     }
 
-    private void smithing(RecipeOutput output, Item armor, TagKey<Item> template, TagKey<Item> base, TagKey<Item> modifier) {
+    private void smithing(RecipeOutput output, Item armor, TagKey<Item> template, TagKey<Item> base, TagKey<Item> modifier, int tier) {
+        smithing(output, armor, template, minTier(base, tier), modifier, base.location().getPath());
+    }
+
+    private void smithing(RecipeOutput output, Item armor, TagKey<Item> template, Ingredient base, TagKey<Item> modifier, String baseName) {
         SmithingTransformRecipeBuilder.smithing(
                 Ingredient.of(template),
-                new PerkTierIngredient(base, 2).toVanilla(),
+                base,
                 Ingredient.of(modifier),
                 RecipeCategory.COMBAT,
                 armor
-        ).unlocks(AllTheArcanistGear.MODID + ":has_" + modifier.location().getPath() + "_ingot", has(modifier)).save(output, base.location().getPath() + "_to_" + getItemName(armor) + "_smithing");
+        ).unlocks(AllTheArcanistGear.MODID + ":has_" + modifier.location().getPath() + "_ingot", has(modifier)).save(output, baseName + "_to_" + getItemName(armor) + "_smithing");
     }
 }

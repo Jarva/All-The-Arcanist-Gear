@@ -18,7 +18,7 @@
   },
   "base": {
     "type": "allthearcanistgear:perk_tier",
-    "min_level": 2,
+    "min_level": 3,
     "tag": "allthearcanistgear:base_legs"
   },
   "result": {

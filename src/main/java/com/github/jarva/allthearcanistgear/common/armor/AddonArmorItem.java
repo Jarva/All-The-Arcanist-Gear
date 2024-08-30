@@ -1,34 +1,23 @@
 package com.github.jarva.allthearcanistgear.common.armor;
 
-import com.github.jarva.allthearcanistgear.AllTheArcanistGear;
 import com.github.jarva.allthearcanistgear.client.renderers.AddonArmorRenderer;
 import com.github.jarva.allthearcanistgear.client.renderers.AddonGenericArmorModel;
 import com.github.jarva.allthearcanistgear.setup.config.ArmorSetConfig;
 import com.github.jarva.allthearcanistgear.setup.registry.AddonArmorMaterialRegistry;
-import com.hollingsworth.arsnouveau.api.perk.ITickablePerk;
-import com.hollingsworth.arsnouveau.api.perk.PerkInstance;
-import com.hollingsworth.arsnouveau.api.util.PerkUtil;
 import com.hollingsworth.arsnouveau.client.renderer.tile.GenericModel;
 import com.hollingsworth.arsnouveau.common.items.data.ArmorPerkHolder;
-import com.hollingsworth.arsnouveau.common.perk.RepairingPerk;
 import com.hollingsworth.arsnouveau.setup.registry.DataComponentRegistry;
 import com.hollingsworth.arsnouveau.setup.registry.ItemsRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
-import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.client.GeoRenderProvider;
@@ -41,12 +30,11 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.function.BiFunction;
 import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class AddonArmorItem extends ArmorItem implements GeoItem {
+    private final int tier;
+
     public static ArmorPerkHolder getPerkHolder(int tier) {
         return new ArmorPerkHolder("", new ArrayList<>(), tier, new HashMap<>());
     }
@@ -64,8 +52,14 @@ public class AddonArmorItem extends ArmorItem implements GeoItem {
                 .component(DataComponentRegistry.ARMOR_PERKS, AddonArmorItem.getPerkHolder(tier)
             )
         );
+        this.tier = tier;
         this.config = config;
         this.model = new AddonGenericArmorModel<AddonArmorItem>(config.name()).withEmptyAnim();
+    }
+
+    @Override
+    public void verifyComponentsAfterLoad(ItemStack stack) {
+        stack.update(DataComponentRegistry.ARMOR_PERKS, AddonArmorItem.getPerkHolder(tier), data -> data.setTier(tier));
     }
 
     public ArmorSetConfig getConfig() {
