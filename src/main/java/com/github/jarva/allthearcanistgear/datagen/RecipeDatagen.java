@@ -38,10 +38,10 @@ public class RecipeDatagen extends RecipeProvider implements IConditionBuilder {
         smithing(withElemental, set.getBoots(), template, ItemTagDatagen.ELEMENTAL_BOOTS, modifier, 0);
 
         RecipeOutput withoutElemental = output.withConditions(not(elementalLoaded));
-        smithing(withoutElemental, set.getHat(), template, ItemTagDatagen.BASE_HAT, modifier, 3);
-        smithing(withoutElemental, set.getChest(), template, ItemTagDatagen.BASE_CHEST, modifier, 3);
-        smithing(withoutElemental, set.getLegs(), template, ItemTagDatagen.BASE_LEGS, modifier, 3);
-        smithing(withoutElemental, set.getBoots(), template, ItemTagDatagen.BASE_BOOTS, modifier, 3);
+        smithing(withoutElemental, set.getHat(), template, ItemTagDatagen.BASE_HAT, modifier, 2);
+        smithing(withoutElemental, set.getChest(), template, ItemTagDatagen.BASE_CHEST, modifier, 2);
+        smithing(withoutElemental, set.getLegs(), template, ItemTagDatagen.BASE_LEGS, modifier, 2);
+        smithing(withoutElemental, set.getBoots(), template, ItemTagDatagen.BASE_BOOTS, modifier, 2);
     }
 
     private Ingredient minTier(TagKey<Item> base, int tier) {
