@@ -4,6 +4,7 @@ import com.github.jarva.allthearcanistgear.client.renderers.AddonArmorRenderer;
 import com.github.jarva.allthearcanistgear.client.renderers.AddonGenericArmorModel;
 import com.github.jarva.allthearcanistgear.setup.config.ArmorSetConfig;
 import com.github.jarva.allthearcanistgear.setup.registry.AddonArmorMaterialRegistry;
+import com.hollingsworth.arsnouveau.api.perk.PerkInstance;
 import com.hollingsworth.arsnouveau.client.renderer.tile.GenericModel;
 import com.hollingsworth.arsnouveau.common.items.data.ArmorPerkHolder;
 import com.hollingsworth.arsnouveau.setup.registry.DataComponentRegistry;
@@ -12,11 +13,9 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoItem;
@@ -126,7 +125,11 @@ public class AddonArmorItem extends ArmorItem implements GeoItem {
     }
 
     @Override
-    public ItemAttributeModifiers getDefaultAttributeModifiers() {
-        return config.buildAttributeMap(this);
+    public ItemAttributeModifiers getDefaultAttributeModifiers(ItemStack is) {
+        ItemAttributeModifiers modifiers = config.buildAttributeMap(this);
+        for (PerkInstance instance : is.get(DataComponentRegistry.ARMOR_PERKS).getPerkInstances(is)) {
+            modifiers = instance.getPerk().applyAttributeModifiers(modifiers, is, instance.getSlot().value(), EquipmentSlotGroup.bySlot(getEquipmentSlot()));
+        }
+        return modifiers;
     }
 }
