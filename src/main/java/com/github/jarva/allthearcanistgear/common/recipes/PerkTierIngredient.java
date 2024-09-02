@@ -39,6 +39,8 @@ public class PerkTierIngredient implements ICustomIngredient {
 
     @Override
     public boolean test(ItemStack itemStack) {
+        boolean isItem = itemStack.is(tag);
+        if (!isItem) return false;
         @Nullable ArmorPerkHolder data = itemStack.get(DataComponentRegistry.ARMOR_PERKS);
         if (data == null) return false;
         return data.getTier() >= minLevel;

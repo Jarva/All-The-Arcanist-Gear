@@ -137,6 +137,8 @@ dependencies {
     runtimeOnly "curse.maven:ato-405593:5657484"
     compileOnly "curse.maven:ars-elemental-561470:5652442"
 //    runtimeOnly "curse.maven:ars-elemental-561470:5652442"
+
+//    runtimeOnly "curse.maven:polymorph-388800:5550094"
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
