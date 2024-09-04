@@ -1,0 +1,28 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "allthemodium"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:smithing_transform",
+        "addition": {
+          "tag": "forge:ingots/unobtainium"
+        },
+        "base": {
+          "item": "allthearcanistgear:vibranium_boots"
+        },
+        "result": {
+          "item": "allthearcanistgear:unobtainium_boots"
+        },
+        "template": {
+          "tag": "allthearcanistgear:unobtainium_smithing"
+        }
+      }
+    }
+  ]
+}

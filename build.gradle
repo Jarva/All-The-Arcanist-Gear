@@ -123,8 +123,8 @@ dependencies {
     modRuntimeOnly "curse.maven:ato-405593:5348605"
     modCompileOnly "curse.maven:ars-elemental-561470:5609198"
 
-    //    runtimeOnly "curse.maven:ars-elemental-561470:5652442"
-    //    runtimeOnly "curse.maven:polymorph-388800:5550094"
+//    modRuntimeOnly "curse.maven:ars-elemental-561470:5609198"
+//    modRuntimeOnly "curse.maven:polymorph-388800:5550094"
 }
 
 processResources {

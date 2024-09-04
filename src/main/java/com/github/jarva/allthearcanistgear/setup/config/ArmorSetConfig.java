@@ -17,6 +17,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.*;
 
 import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.UUID;
 
 public record ArmorSetConfig(
@@ -48,18 +49,18 @@ public record ArmorSetConfig(
         };
     }
 
-    private static final EnumMap<ArmorItem.Type, UUID> ARMOR_MODIFIER_UUID_PER_TYPE = Util.make(new EnumMap<>(ArmorItem.Type.class), (enumMap) -> {
-        enumMap.put(ArmorItem.Type.BOOTS, UUID.fromString("845DB27C-C624-495F-8C9F-6020A9A58B6B"));
-        enumMap.put(ArmorItem.Type.LEGGINGS, UUID.fromString("D8499B04-0E66-4726-AB29-64469D734E0D"));
-        enumMap.put(ArmorItem.Type.CHESTPLATE, UUID.fromString("9F3D476D-C118-4544-8365-64846904B48E"));
-        enumMap.put(ArmorItem.Type.HELMET, UUID.fromString("2AD3F246-FEE1-4E67-B886-69FD380BB150"));
+    private static final HashMap<EquipmentSlot, UUID> ARMOR_MODIFIER_UUID_PER_TYPE = Util.make(new HashMap<>(), (map) -> {
+        map.put(EquipmentSlot.FEET, UUID.fromString("845DB27C-C624-495F-8C9F-6020A9A58B6B"));
+        map.put(EquipmentSlot.LEGS, UUID.fromString("D8499B04-0E66-4726-AB29-64469D734E0D"));
+        map.put(EquipmentSlot.CHEST, UUID.fromString("9F3D476D-C118-4544-8365-64846904B48E"));
+        map.put(EquipmentSlot.HEAD, UUID.fromString("2AD3F246-FEE1-4E67-B886-69FD380BB150"));
     });
 
     public Multimap<Attribute, AttributeModifier> buildAttributeMap(AddonArmorItem item) {
         EquipmentSlot slot = item.getEquipmentSlot();
 
         int defense = getDefenseBySlot(slot);
-                    int toughness = toughness().get();
+        int toughness = toughness().get();
         double knockback = knockback().get();
         double maxMana = maxMana().get();
         double manaRegen = manaRegen().get();

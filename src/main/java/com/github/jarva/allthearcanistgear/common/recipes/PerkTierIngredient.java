@@ -1,5 +1,6 @@
 package com.github.jarva.allthearcanistgear.common.recipes;
 
+import com.github.jarva.allthearcanistgear.AllTheArcanistGear;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.hollingsworth.arsnouveau.api.perk.ArmorPerkHolder;
@@ -9,6 +10,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.tags.TagKey;
@@ -16,7 +18,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.crafting.AbstractIngredient;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IIngredientSerializer;
+
+import java.util.Objects;
 
 public class PerkTierIngredient extends AbstractIngredient {
     public static final PerkTierIngredient.Serializer INSTANCE = new PerkTierIngredient.Serializer();
@@ -44,6 +49,18 @@ public class PerkTierIngredient extends AbstractIngredient {
     }
 
     @Override
+    public ItemStack[] getItems() {
+        return BuiltInRegistries.ITEM.getOrCreateTag(tag).stream().map(ItemStack::new).map(is -> {
+            IPerkHolder<ItemStack> data = PerkUtil.getPerkHolder(is);
+            if (data instanceof ArmorPerkHolder armorPerkHolder) {
+                armorPerkHolder.setTier(minLevel);
+                return is;
+            }
+            return null;
+        }).filter(Objects::nonNull).toArray(ItemStack[]::new);
+    }
+
+    @Override
     public boolean isSimple() {
         return false;
     }
@@ -55,7 +72,9 @@ public class PerkTierIngredient extends AbstractIngredient {
 
     @Override
     public JsonElement toJson() {
-        return CODEC.codec().encodeStart(JsonOps.INSTANCE, this).result().get();
+        JsonObject json = CODEC.codec().encodeStart(JsonOps.INSTANCE, this).result().get().getAsJsonObject();
+        json.addProperty("type", AllTheArcanistGear.prefix("perk_tier").toString());
+        return json;
     }
 
     public static class Serializer implements IIngredientSerializer<PerkTierIngredient> {

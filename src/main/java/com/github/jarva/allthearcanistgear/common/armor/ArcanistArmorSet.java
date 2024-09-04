@@ -20,10 +20,10 @@ public class ArcanistArmorSet {
         this.config = config;
         this.name = config.name();
         this.tier = tier;
-        this.head = AddonItemRegistry.register(name + "_hat", () -> new AddonArmorItem(config, ArmorItem.Type.HELMET, tier));
-        this.chest = AddonItemRegistry.register(name + "_robes", () -> new AddonArmorItem(config, ArmorItem.Type.CHESTPLATE, tier));
-        this.legs = AddonItemRegistry.register(name + "_leggings", () -> new AddonArmorItem(config, ArmorItem.Type.LEGGINGS, tier));
         this.feet = AddonItemRegistry.register(name + "_boots", () -> new AddonArmorItem(config, ArmorItem.Type.BOOTS, tier));
+        this.legs = AddonItemRegistry.register(name + "_leggings", () -> new AddonArmorItem(config, ArmorItem.Type.LEGGINGS, tier));
+        this.chest = AddonItemRegistry.register(name + "_robes", () -> new AddonArmorItem(config, ArmorItem.Type.CHESTPLATE, tier));
+        this.head = AddonItemRegistry.register(name + "_hat", () -> new AddonArmorItem(config, ArmorItem.Type.HELMET, tier));
     }
 
     public ArmorSetConfig getConfig() {

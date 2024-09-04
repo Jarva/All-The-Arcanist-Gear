@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "ars_elemental:air_boots",
+      "required": false
+    },
+    {
+      "id": "ars_elemental:earth_boots",
+      "required": false
+    },
+    {
+      "id": "ars_elemental:fire_boots",
+      "required": false
+    },
+    {
+      "id": "ars_elemental:aqua_boots",
+      "required": false
+    }
+  ]
+}

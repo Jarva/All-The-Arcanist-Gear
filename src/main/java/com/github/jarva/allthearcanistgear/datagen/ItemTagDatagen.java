@@ -3,8 +3,6 @@ package com.github.jarva.allthearcanistgear.datagen;
 import alexthw.ars_elemental.common.items.armor.ArmorSet;
 import alexthw.ars_elemental.registry.ModItems;
 import com.github.jarva.allthearcanistgear.AllTheArcanistGear;
-import com.github.jarva.allthearcanistgear.common.armor.ArcanistArmorSet;
-import com.github.jarva.allthearcanistgear.setup.registry.AddonItemRegistry;
 import com.hollingsworth.arsnouveau.setup.registry.ItemsRegistry;
 import com.thevortex.allthemodium.registry.ModRegistry;
 import net.minecraft.core.HolderLookup;
@@ -31,9 +29,9 @@ public class ItemTagDatagen extends IntrinsicHolderTagsProvider<Item> {
     public static final TagKey<Item> ELEMENTAL_BOOTS = ItemTags.create(AllTheArcanistGear.prefix("elemental_boots"));
 
 
-    public static final TagKey<Item> ALLTHEMODIUM_INGOT = ItemTags.create(ResourceLocation.tryParse(("c:ingots/allthemodium")));
-    public static final TagKey<Item> VIBRANIUM_INGOT = ItemTags.create(ResourceLocation.tryParse("c:ingots/vibranium"));
-    public static final TagKey<Item> UNOBTAINIUM_INGOT = ItemTags.create(ResourceLocation.tryParse(("c:ingots/unobtainium")));
+    public static final TagKey<Item> ALLTHEMODIUM_INGOT = ItemTags.create(new ResourceLocation("forge:ingots/allthemodium"));
+    public static final TagKey<Item> VIBRANIUM_INGOT = ItemTags.create(new ResourceLocation("forge:ingots/vibranium"));
+    public static final TagKey<Item> UNOBTAINIUM_INGOT = ItemTags.create(new ResourceLocation("forge:ingots/unobtainium"));
     public static final TagKey<Item> ALLTHEMODIUM_SMITHING_TEMPLATE = ItemTags.create(AllTheArcanistGear.prefix("allthemodium_smithing"));
     public static final TagKey<Item> VIBRANIUM_SMITHING_TEMPLATE = ItemTags.create(AllTheArcanistGear.prefix("vibranium_smithing"));
     public static final TagKey<Item> UNOBTAINIUM_SMITHING_TEMPLATE = ItemTags.create(AllTheArcanistGear.prefix("unobtainium_smithing"));

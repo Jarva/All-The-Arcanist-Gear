@@ -3,6 +3,7 @@ package com.github.jarva.allthearcanistgear.common.armor;
 import com.github.jarva.allthearcanistgear.client.renderers.AddonArmorRenderer;
 import com.github.jarva.allthearcanistgear.client.renderers.AddonGenericArmorModel;
 import com.github.jarva.allthearcanistgear.setup.config.ArmorSetConfig;
+import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.hollingsworth.arsnouveau.api.perk.*;
 import com.hollingsworth.arsnouveau.api.registry.PerkRegistry;
@@ -127,18 +128,27 @@ public class AddonArmorItem extends ArmorItem implements GeoItem {
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
-        Multimap<Attribute, AttributeModifier> attributes = getDefaultAttributeModifiers(slot);
+        ImmutableMultimap.Builder<Attribute, AttributeModifier> attributes = new ImmutableMultimap.Builder();
+        attributes.putAll(getDefaultAttributeModifiers(slot));
+        if (slot != getEquipmentSlot()) {
+            return attributes.build();
+        }
+
         IPerkHolder<ItemStack> perkHolder = PerkUtil.getPerkHolder(stack);
-        if (perkHolder == null) return attributes;
+        if (perkHolder == null) return attributes.build();
         for (PerkInstance perkInstance : perkHolder.getPerkInstances()) {
             IPerk perk = perkInstance.getPerk();
             attributes.putAll(perk.getModifiers(slot, stack, perkInstance.getSlot().value));
         }
-        return attributes;
+        return attributes.build();
     }
 
     @Override
     public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot slot) {
+        if (slot != getEquipmentSlot()) {
+            ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
+            return builder.build();
+        }
         return config.buildAttributeMap(this);
     }
 }

@@ -1,0 +1,32 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "allthemodium"
+        },
+        {
+          "type": "forge:mod_loaded",
+          "modid": "ars_elemental"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:smithing_transform",
+        "addition": {
+          "tag": "forge:ingots/allthemodium"
+        },
+        "base": {
+          "tag": "allthearcanistgear:elemental_chest"
+        },
+        "result": {
+          "item": "allthearcanistgear:allthemodium_robes"
+        },
+        "template": {
+          "tag": "allthearcanistgear:allthemodium_smithing"
+        }
+      }
+    }
+  ]
+}

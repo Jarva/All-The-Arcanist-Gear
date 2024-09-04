@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "ars_elemental:air_hat",
+      "required": false
+    },
+    {
+      "id": "ars_elemental:earth_hat",
+      "required": false
+    },
+    {
+      "id": "ars_elemental:fire_hat",
+      "required": false
+    },
+    {
+      "id": "ars_elemental:aqua_hat",
+      "required": false
+    }
+  ]
+}

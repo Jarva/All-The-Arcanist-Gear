@@ -1,0 +1,28 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "allthemodium"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:smithing_transform",
+        "addition": {
+          "tag": "forge:ingots/vibranium"
+        },
+        "base": {
+          "item": "allthearcanistgear:allthemodium_hat"
+        },
+        "result": {
+          "item": "allthearcanistgear:vibranium_hat"
+        },
+        "template": {
+          "tag": "allthearcanistgear:vibranium_smithing"
+        }
+      }
+    }
+  ]
+}

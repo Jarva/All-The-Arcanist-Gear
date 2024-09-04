@@ -1,0 +1,37 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "allthemodium"
+        },
+        {
+          "type": "forge:not",
+          "value": {
+            "type": "forge:mod_loaded",
+            "modid": "ars_elemental"
+          }
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:smithing_transform",
+        "addition": {
+          "tag": "forge:ingots/allthemodium"
+        },
+        "base": {
+          "type": "allthearcanistgear:perk_tier",
+          "min_level": 2,
+          "tag": "allthearcanistgear:base_legs"
+        },
+        "result": {
+          "item": "allthearcanistgear:allthemodium_leggings"
+        },
+        "template": {
+          "tag": "allthearcanistgear:allthemodium_smithing"
+        }
+      }
+    }
+  ]
+}
