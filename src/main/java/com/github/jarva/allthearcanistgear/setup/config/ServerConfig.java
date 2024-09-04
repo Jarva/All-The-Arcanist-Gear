@@ -1,13 +1,11 @@
 package com.github.jarva.allthearcanistgear.setup.config;
 
-import net.neoforged.neoforge.common.ModConfigSpec;
-
-import java.util.List;
+import net.minecraftforge.common.ForgeConfigSpec;
 
 public class ServerConfig {
-    private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
+    private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
 
-    public static ModConfigSpec SPEC;
+    public static ForgeConfigSpec SPEC;
     public static ArmorSetConfig ALLTHEMODIUM_CONFIG;
     public static ArmorSetConfig VIBRANIUM_CONFIG;
     public static ArmorSetConfig UNOBTAINIUM_CONFIG;

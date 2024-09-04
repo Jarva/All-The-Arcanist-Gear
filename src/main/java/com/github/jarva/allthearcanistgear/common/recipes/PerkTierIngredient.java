@@ -1,27 +1,25 @@
 package com.github.jarva.allthearcanistgear.common.recipes;
 
-import com.github.jarva.allthearcanistgear.setup.registry.AddonIngredientTypeRegistry;
-import com.hollingsworth.arsnouveau.common.items.data.ArmorPerkHolder;
-import com.hollingsworth.arsnouveau.setup.registry.DataComponentRegistry;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.hollingsworth.arsnouveau.api.perk.ArmorPerkHolder;
+import com.hollingsworth.arsnouveau.api.perk.IPerkHolder;
+import com.hollingsworth.arsnouveau.api.util.PerkUtil;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.common.crafting.ICustomIngredient;
-import net.neoforged.neoforge.common.crafting.IngredientType;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraftforge.common.crafting.AbstractIngredient;
+import net.minecraftforge.common.crafting.IIngredientSerializer;
 
-import java.util.Objects;
-import java.util.stream.Stream;
-
-public class PerkTierIngredient implements ICustomIngredient {
+public class PerkTierIngredient extends AbstractIngredient {
+    public static final PerkTierIngredient.Serializer INSTANCE = new PerkTierIngredient.Serializer();
     private final int minLevel;
     private final TagKey<Item> tag;
 
@@ -30,8 +28,6 @@ public class PerkTierIngredient implements ICustomIngredient {
             Codec.INT.fieldOf("min_level").forGetter(e -> e.minLevel)
     ).apply(instance, PerkTierIngredient::new));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, PerkTierIngredient> STREAM_CODEC = ByteBufCodecs.fromCodecWithRegistries(CODEC.codec());
-
     public PerkTierIngredient(TagKey<Item> tag, int level) {
         this.tag = tag;
         this.minLevel = level;
@@ -39,19 +35,12 @@ public class PerkTierIngredient implements ICustomIngredient {
 
     @Override
     public boolean test(ItemStack itemStack) {
-        @Nullable ArmorPerkHolder data = itemStack.get(DataComponentRegistry.ARMOR_PERKS);
-        if (data == null) return false;
-        return data.getTier() >= minLevel;
-    }
-
-    @Override
-    public Stream<ItemStack> getItems() {
-        return BuiltInRegistries.ITEM.getOrCreateTag(tag).stream().map(ItemStack::new).map(is -> {
-            @Nullable ArmorPerkHolder data = is.get(DataComponentRegistry.ARMOR_PERKS);
-            if (data == null) return null;
-            is.set(DataComponentRegistry.ARMOR_PERKS, data.setTier(minLevel));
-            return is;
-        }).filter(Objects::nonNull);
+        if (!itemStack.is(tag)) return false;
+        IPerkHolder<ItemStack> data = PerkUtil.getPerkHolder(itemStack);
+        if (data instanceof ArmorPerkHolder armorPerkHolder) {
+            return armorPerkHolder.getTier() >= minLevel;
+        }
+        return false;
     }
 
     @Override
@@ -60,7 +49,29 @@ public class PerkTierIngredient implements ICustomIngredient {
     }
 
     @Override
-    public IngredientType<?> getType() {
-        return AddonIngredientTypeRegistry.PERK_TIER.get();
+    public IIngredientSerializer<? extends Ingredient> getSerializer() {
+        return INSTANCE;
+    }
+
+    @Override
+    public JsonElement toJson() {
+        return CODEC.codec().encodeStart(JsonOps.INSTANCE, this).result().get();
+    }
+
+    public static class Serializer implements IIngredientSerializer<PerkTierIngredient> {
+        @Override
+        public PerkTierIngredient parse(FriendlyByteBuf arg) {
+            return arg.readJsonWithCodec(CODEC.codec());
+        }
+
+        @Override
+        public PerkTierIngredient parse(JsonObject jsonObject) {
+            return CODEC.codec().parse(JsonOps.INSTANCE, jsonObject).result().get();
+        }
+
+        @Override
+        public void write(FriendlyByteBuf arg, PerkTierIngredient arg2) {
+            arg.writeJsonWithCodec(CODEC.codec(), arg2);
+        }
     }
 }

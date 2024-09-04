@@ -2,18 +2,22 @@ package com.github.jarva.allthearcanistgear.setup.config;
 
 import com.github.jarva.allthearcanistgear.AllTheArcanistGear;
 import com.github.jarva.allthearcanistgear.common.armor.AddonArmorItem;
+import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimap;
 import com.hollingsworth.arsnouveau.api.perk.PerkAttributes;
+import net.minecraft.Util;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.item.component.ItemAttributeModifiers;
-import net.neoforged.neoforge.common.ModConfigSpec;
-import net.neoforged.neoforge.common.ModConfigSpec.BooleanValue;
-import net.neoforged.neoforge.common.ModConfigSpec.DoubleValue;
-import net.neoforged.neoforge.common.ModConfigSpec.IntValue;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.common.ForgeConfigSpec.*;
+
+import java.util.EnumMap;
+import java.util.UUID;
 
 public record ArmorSetConfig(
         String name,
@@ -32,7 +36,7 @@ public record ArmorSetConfig(
         BooleanValue preventDragonsBreath,
         BooleanValue preventWither,
         BooleanValue preventLevitation,
-        BooleanValue preventFallDamage
+        ForgeConfigSpec.BooleanValue preventFallDamage
 ) {
     public int getDefenseBySlot(EquipmentSlot slot) {
         return switch (slot) {
@@ -44,7 +48,14 @@ public record ArmorSetConfig(
         };
     }
 
-    public ItemAttributeModifiers buildAttributeMap(AddonArmorItem item) {
+    private static final EnumMap<ArmorItem.Type, UUID> ARMOR_MODIFIER_UUID_PER_TYPE = Util.make(new EnumMap<>(ArmorItem.Type.class), (enumMap) -> {
+        enumMap.put(ArmorItem.Type.BOOTS, UUID.fromString("845DB27C-C624-495F-8C9F-6020A9A58B6B"));
+        enumMap.put(ArmorItem.Type.LEGGINGS, UUID.fromString("D8499B04-0E66-4726-AB29-64469D734E0D"));
+        enumMap.put(ArmorItem.Type.CHESTPLATE, UUID.fromString("9F3D476D-C118-4544-8365-64846904B48E"));
+        enumMap.put(ArmorItem.Type.HELMET, UUID.fromString("2AD3F246-FEE1-4E67-B886-69FD380BB150"));
+    });
+
+    public Multimap<Attribute, AttributeModifier> buildAttributeMap(AddonArmorItem item) {
         EquipmentSlot slot = item.getEquipmentSlot();
 
         int defense = getDefenseBySlot(slot);
@@ -55,33 +66,34 @@ public record ArmorSetConfig(
         double spellPower = spellPower().get();
 
         ResourceLocation modifier = AllTheArcanistGear.prefix("armor." + name() + "." + slot.getName());
-        EquipmentSlotGroup group = EquipmentSlotGroup.bySlot(slot);
 
-        ItemAttributeModifiers.Builder builder = ItemAttributeModifiers.builder();
+        ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = new ImmutableMultimap.Builder<>();
+
+        UUID uuid = ARMOR_MODIFIER_UUID_PER_TYPE.get(item.getEquipmentSlot());
 
         if (defense != 0) {
-            builder.add(Attributes.ARMOR, new AttributeModifier(modifier, defense, Operation.ADD_VALUE), group);
+            builder.put(Attributes.ARMOR, new AttributeModifier(uuid, modifier.toString(), defense, Operation.ADDITION));
         }
         if (toughness != 0) {
-            builder.add(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(modifier, toughness, Operation.ADD_VALUE), group);
+            builder.put(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(uuid, modifier.toString(), toughness, Operation.ADDITION));
         }
         if (knockback != 0) {
-            builder.add(Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(modifier, knockback, Operation.ADD_VALUE), group);
+            builder.put(Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(uuid, modifier.toString(), knockback, Operation.ADDITION));
         }
         if (maxMana != 0) {
-            builder.add(PerkAttributes.MAX_MANA, new AttributeModifier(modifier, maxMana, Operation.ADD_VALUE), group);
+            builder.put(PerkAttributes.MAX_MANA.get(), new AttributeModifier(uuid, modifier.toString(), maxMana, Operation.ADDITION));
         }
         if (manaRegen != 0) {
-            builder.add(PerkAttributes.MANA_REGEN_BONUS, new AttributeModifier(modifier, manaRegen, Operation.ADD_VALUE), group);
+            builder.put(PerkAttributes.MANA_REGEN_BONUS.get(), new AttributeModifier(uuid, modifier.toString(), manaRegen, Operation.ADDITION));
         }
         if (spellPower != 0) {
-            builder.add(PerkAttributes.SPELL_DAMAGE_BONUS, new AttributeModifier(modifier, spellPower, Operation.ADD_VALUE), group);
+            builder.put(PerkAttributes.SPELL_DAMAGE_BONUS.get(), new AttributeModifier(uuid, modifier.toString(), spellPower, Operation.ADDITION));
         }
 
         return builder.build();
     }
 
-    public static ArmorSetConfig build(ModConfigSpec.Builder builder, String name, DefenseValues values, ArcanistStats stats, Capabilities capabilities) {
+    public static ArmorSetConfig build(ForgeConfigSpec.Builder builder, String name, DefenseValues values, ArcanistStats stats, Capabilities capabilities) {
         String localizedName = name.substring(0, 1).toUpperCase() + name.substring(1);
         builder.push(name);
         builder.define("_comment", "Config for " + localizedName + " armor");

@@ -1,6 +1,7 @@
 package com.github.jarva.allthearcanistgear.setup.registry;
 
 import com.github.jarva.allthearcanistgear.common.armor.ArcanistArmorSet;
+import com.hollingsworth.arsnouveau.api.perk.ArmorPerkHolder;
 import com.hollingsworth.arsnouveau.api.perk.PerkSlot;
 import com.hollingsworth.arsnouveau.api.registry.PerkRegistry;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -24,7 +25,11 @@ public class ArsNouveauRegistry {
             for (EquipmentSlot slot : EquipmentSlot.values()) {
                 Item item = arcanistArmorSet.getArmorFromSlot(slot);
                 if (item == null) continue;
-                PerkRegistry.registerPerkProvider(item, List.of(empty, empty, empty, empty, t5, t6, t7));
+                PerkRegistry.registerPerkProvider(item, stack -> {
+                    ArmorPerkHolder holder = new ArmorPerkHolder(stack, List.of(empty, empty, empty, empty, t5, t6, t7));
+                    holder.setTier(arcanistArmorSet.getTier());
+                    return holder;
+                });
             }
         }
     }

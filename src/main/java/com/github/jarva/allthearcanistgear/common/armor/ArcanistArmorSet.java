@@ -2,16 +2,16 @@ package com.github.jarva.allthearcanistgear.common.armor;
 
 import com.github.jarva.allthearcanistgear.setup.config.ArmorSetConfig;
 import com.github.jarva.allthearcanistgear.setup.registry.AddonItemRegistry;
-import com.hollingsworth.arsnouveau.setup.registry.ItemRegistryWrapper;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.registries.RegistryObject;
 
 public class ArcanistArmorSet {
-    private final ItemRegistryWrapper<Item> head;
-    private final ItemRegistryWrapper<Item> chest;
-    private final ItemRegistryWrapper<Item> legs;
-    private final ItemRegistryWrapper<Item> feet;
+    private final RegistryObject<Item> head;
+    private final RegistryObject<Item> chest;
+    private final RegistryObject<Item> legs;
+    private final RegistryObject<Item> feet;
     private final String name;
     private final int tier;
     private final ArmorSetConfig config;

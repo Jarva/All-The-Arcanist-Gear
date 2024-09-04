@@ -1,11 +1,36 @@
 plugins {
-    id 'java-library'
-    id 'maven-publish'
-    id 'net.neoforged.moddev' version '1.0.17'
+    id "dev.architectury.loom" version "1.6-SNAPSHOT"
+    id "maven-publish"
 }
 
-tasks.named('wrapper', Wrapper).configure {
-    distributionType = Wrapper.DistributionType.BIN
+sourceCompatibility = targetCompatibility = JavaVersion.VERSION_17
+
+archivesBaseName = project.mod_id
+version = "${project.minecraft_version}-${new File('version').text.trim()}"
+group = project.mod_group_id
+
+def generatedResources = file("src/generated/resources")
+sourceSets {
+    main {
+        resources.srcDir generatedResources
+    }
+}
+
+loom {
+    runs {
+        data {
+            data()
+            programArgs "--all", "--mod", "allthearcanistgear", "--existing-mod", "ars_nouveau", "--existing-mod", "ars_elemental", "--existing-mod", "allthemodium"
+            programArgs "--existing", file("src/main/resources").absolutePath
+            programArgs "--output", generatedResources.absolutePath
+        }
+    }
+
+    forge {
+        mixinConfigs = [
+            "allthearcanistgear.mixins.json"
+        ]
+    }
 }
 
 repositories {
@@ -14,43 +39,46 @@ repositories {
             includeGroup "com.hollingsworth.ars_nouveau"
         }
     }
+
     maven {
         name = 'ParchmentMC'
         url = 'https://maven.parchmentmc.org'
     }
+
+    maven { url = 'https://files.minecraftforge.net/maven/' }
+
+    maven {
+        url = "https://maven.theillusivec4.top/"
+    }
+    maven {
+        name = "Progwml6 maven"
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
+    maven {
+        name = "ModMaven"
+        url = "https://modmaven.k-4u.nl"
+    }
+    maven {
+        url = "https://maven.blamejared.com"
+    }
+    maven {
+        url = "https://www.cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+
+    maven { url 'https://jitpack.io' }
+
     maven {
         name = 'GeckoLib'
         url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
         content {
-            includeGroup("software.bernie.geckolib")
+            includeGroupByRegex("software\\.bernie.*")
+            includeGroup("com.eliotlash.mclib")
         }
     }
-    maven {
-        name = "Jared's maven"
-        url = "https://maven.blamejared.com/"
-    }
-    maven {
-        name = 'Forge'
-        url = "https://maven.minecraftforge.net"
-    }
-    maven {
-        name = "OctoStudios"
-        url = uri("https://maven.octo-studios.com/releases")
-    }
-    maven {
-        name = "Illusive Soulworks maven"
-        url = "https://maven.theillusivec4.top/"
-    }
-    exclusiveContent {
-        forRepository {
-            maven {
-                url "https://cursemaven.com"
-            }
-        }
-        filter {
-            includeGroup "curse.maven"
-        }
-    }
+
     exclusiveContent {
         forRepository {
             maven {
@@ -64,86 +92,47 @@ repositories {
     }
 }
 
-base {
-    version = "${minecraft_version}-${new File('version').text.trim()}"
-    group = mod_group_id
-    archivesName = mod_id
-}
-
-java.toolchain.languageVersion = JavaLanguageVersion.of(21)
-
-neoForge {
-    version = project.neo_version
-
-    parchment {
-        mappingsVersion = project.parchment_mappings_version
-        minecraftVersion = project.parchment_minecraft_version
-    }
-
-    runs {
-        client {
-            client()
-            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
-        }
-
-        server {
-            server()
-            programArgument '--nogui'
-            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
-        }
-
-        gameTestServer {
-            type = "gameTestServer"
-            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
-        }
-
-        data {
-            data()
-            programArguments.addAll("--all", "--mod", "allthearcanistgear", "--existing-mod", "ars_nouveau", "--existing-mod", "ars_elemental", "--existing-mod", "allthemodium", "--existing", file("src/main/resources").absolutePath, "--output", file("src/generated/resources").absolutePath)
-        }
-
-        configureEach {
-            systemProperty 'forge.logging.markers', 'REGISTRIES'
-
-            logLevel = org.slf4j.event.Level.INFO
-        }
-    }
-
-    mods {
-        "${mod_id}" {
-            sourceSet(sourceSets.main)
-        }
-    }
-}
-
-sourceSets.main.resources { srcDir 'src/generated/resources' }
-
-configurations {
-    runtimeClasspath.extendsFrom localRuntime
-}
-
 dependencies {
-    implementation "com.hollingsworth.ars_nouveau:ars_nouveau-1.21.0:${project.ars_version}"
-    implementation "software.bernie.geckolib:geckolib-neoforge-${project.minecraft_version}:${project.gecko_version}"
-    implementation "vazkii.patchouli:Patchouli:${project.mc_version}-${project.patchouli_version}"
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
 
-    compileOnly "mezz.jei:jei-${project.mc_version}-neoforge-api:${project.jei_version}"
-    implementation "mezz.jei:jei-${project.mc_version}-neoforge:${project.jei_version}"
+    mappings loom.layered() {
+        officialMojangMappings()
+        parchment("org.parchmentmc.data:parchment-${project.parchment_minecraft_version}:${project.parchment_mappings_version}@zip")
+    }
 
-    implementation "top.theillusivec4.curios:curios-neoforge:${project.curios_version}+${project.mc_version}"
-    implementation "com.github.glitchfiend:TerraBlender-neoforge:${project.mc_version}-${project.terrablender_version}"
+    forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
 
-    implementation "curse.maven:allthemodium-364466:5666497"
-    runtimeOnly "curse.maven:ato-405593:5657484"
-    implementation "curse.maven:ars-elemental-561470:5652442"
+    modImplementation "com.hollingsworth.ars_nouveau:ars_nouveau-${project.minecraft_version}:${project.ars_version}"
+    modImplementation "software.bernie.geckolib:geckolib-forge-${project.minecraft_version}:${project.gecko_version}"
+    forgeRuntimeLibrary "com.eliotlash.mclib:mclib:20"
+    modImplementation "vazkii.patchouli:Patchouli:${project.minecraft_version}-${project.patchouli_version}"
+
+    modCompileOnlyApi "mezz.jei:jei-${project.minecraft_version}-common-api:${project.jei_version}"
+    modCompileOnlyApi "mezz.jei:jei-${project.minecraft_version}-forge-api:${project.jei_version}"
+
+    modRuntimeOnly("mezz.jei:jei-${project.minecraft_version}-forge:${project.jei_version}") { transitive = false }
+
+    modImplementation "top.theillusivec4.curios:curios-forge:${project.curios_version}+${project.minecraft_version}"
+    modImplementation "com.github.glitchfiend:TerraBlender-forge:${project.minecraft_version}-${project.terrablender_version}"
+
+    implementation(annotationProcessor("com.github.llamalad7.mixinextras:mixinextras-common:0.2.0-beta.8"))
+    implementation("com.github.llamalad7.mixinextras:mixinextras-forge:0.2.0-beta.8")
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    modImplementation "curse.maven:allthemodium-364466:5439699"
+    modRuntimeOnly "curse.maven:ato-405593:5348605"
+    modCompileOnly "curse.maven:ars-elemental-561470:5609198"
+
+    //    runtimeOnly "curse.maven:ars-elemental-561470:5652442"
+    //    runtimeOnly "curse.maven:polymorph-388800:5550094"
 }
 
-var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
+processResources {
     var replaceProperties = [
             minecraft_version      : minecraft_version,
             minecraft_version_range: minecraft_version_range,
-            neo_version            : neo_version,
-            neo_version_range      : neo_version_range,
+            forge_version          : forge_version,
+            forge_version_range    : forge_version_range,
             loader_version_range   : loader_version_range,
             mod_id                 : mod_id,
             mod_name               : mod_name,
@@ -153,34 +142,47 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
             mod_description        : mod_description
     ]
     inputs.properties replaceProperties
-    expand replaceProperties
-    from "src/main/templates"
-    into "build/generated/sources/modMetadata"
+
+    filesMatching("META-INF/mods.toml") {
+        expand replaceProperties
+    }
 }
 
-sourceSets.main.resources.srcDir generateModMetadata
-neoForge.ideSyncTask generateModMetadata
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+    options.release = 17
+}
 
+java {
+    withSourcesJar()
+}
+
+jar {
+    manifest {
+        attributes([
+                "Specification-Title"     : project.mod_id,
+                "Specification-Vendor"    : project.mod_authors,
+                "Specification-Version"   : "1",
+                "Implementation-Title"    : project.name,
+                "Implementation-Version"  : version,
+                "Implementation-Vendor"   : project.mod_authors,
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+}
+
+// configure the maven publication
 publishing {
     publications {
-        register('mavenJava', MavenPublication) {
-            from components.java
+        mavenJava(MavenPublication) {
+            artifact(remapJar) {
+                builtBy remapJar
+            }
+            artifact(sourcesJar) {
+                builtBy remapSourcesJar
+            }
         }
     }
-    repositories {
-        maven {
-            url "file://${project.projectDir}/repo"
-        }
-    }
-}
 
-tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8'
-}
-
-idea {
-    module {
-        downloadSources = true
-        downloadJavadoc = true
-    }
+    repositories {}
 }

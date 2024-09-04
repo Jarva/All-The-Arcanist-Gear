@@ -2,11 +2,11 @@ package com.github.jarva.allthearcanistgear.datagen;
 
 import com.github.jarva.allthearcanistgear.AllTheArcanistGear;
 import com.github.jarva.allthearcanistgear.setup.registry.AddonItemRegistry;
-import com.hollingsworth.arsnouveau.setup.registry.ItemRegistryWrapper;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
-import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.minecraftforge.client.model.generators.ItemModelProvider;
+import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.RegistryObject;
 
 public class ItemModelDatagen extends ItemModelProvider {
     public ItemModelDatagen(PackOutput output, ExistingFileHelper exFileHelper) {
@@ -15,7 +15,7 @@ public class ItemModelDatagen extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        for (ItemRegistryWrapper<? extends Item> item : AddonItemRegistry.DATAGEN_ITEMS) {
+        for (RegistryObject<? extends Item> item : AddonItemRegistry.DATAGEN_ITEMS) {
             basicItem(item.get());
         }
     }

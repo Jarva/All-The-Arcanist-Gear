@@ -9,16 +9,16 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
-import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
-import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
+import net.minecraftforge.event.entity.living.MobEffectEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-@EventBusSubscriber(modid = AllTheArcanistGear.MODID, bus = EventBusSubscriber.Bus.GAME)
+@Mod.EventBusSubscriber(modid = AllTheArcanistGear.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ArmorEvents {
     @SubscribeEvent
     public static void onPlayerFall(LivingFallEvent event) {
@@ -26,7 +26,7 @@ public class ArmorEvents {
     }
 
     @SubscribeEvent
-    public static void onEntityHurt(LivingIncomingDamageEvent event) {
+    public static void onEntityHurt(LivingDamageEvent event) {
         if (event.getEntity().getCommandSenderWorld().isClientSide()) return;
 
         LivingEntity entity = event.getEntity();
@@ -45,9 +45,8 @@ public class ArmorEvents {
     public static void onEffectApplied(MobEffectEvent.Applicable event) {
         LivingEntity entity = event.getEntity();
         MobEffectInstance instance = event.getEffectInstance();
-        if (instance == null) return;
-        processArmorEvent(entity, EquipmentSlot.LEGS, () -> instance.is(MobEffects.WITHER), ArmorSetConfig::preventWither, () -> event.setResult(MobEffectEvent.Applicable.Result.DO_NOT_APPLY));
-        processArmorEvent(entity, EquipmentSlot.LEGS, () -> instance.is(MobEffects.LEVITATION), ArmorSetConfig::preventLevitation, () -> event.setResult(MobEffectEvent.Applicable.Result.DO_NOT_APPLY));
+        processArmorEvent(entity, EquipmentSlot.LEGS, () -> instance.getEffect().equals(MobEffects.WITHER), ArmorSetConfig::preventWither, () -> event.setResult(MobEffectEvent.Applicable.Result.DENY));
+        processArmorEvent(entity, EquipmentSlot.LEGS, () -> instance.getEffect().equals(MobEffects.LEVITATION), ArmorSetConfig::preventLevitation, () -> event.setResult(MobEffectEvent.Applicable.Result.DENY));
     }
 
     private static void processArmorEvent(LivingEntity entity, EquipmentSlot slot, Supplier<Boolean> predicate, Function<ArmorSetConfig, Supplier<Boolean>> configFn, Runnable cancel) {

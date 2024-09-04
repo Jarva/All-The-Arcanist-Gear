@@ -3,7 +3,7 @@ package com.github.jarva.allthearcanistgear.datagen;
 import com.github.jarva.allthearcanistgear.common.armor.ArcanistArmorSet;
 import com.github.jarva.allthearcanistgear.setup.registry.AddonItemRegistry;
 import net.minecraft.data.PackOutput;
-import net.neoforged.neoforge.common.data.LanguageProvider;
+import net.minecraftforge.common.data.LanguageProvider;
 
 public class LangDatagen extends LanguageProvider {
 

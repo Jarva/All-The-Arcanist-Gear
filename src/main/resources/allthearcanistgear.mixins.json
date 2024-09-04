@@ -2,12 +2,9 @@
   "required": true,
   "minVersion": "0.8",
   "package": "com.github.jarva.allthearcanistgear.mixin",
-  "compatibilityLevel": "JAVA_8",
-  "refmap": "allthearcanistgear.refmap.json",
-  "mixins": [
-  ],
-  "client": [
-  ],
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [],
+  "client": [],
   "injectors": {
     "defaultRequire": 1
   }

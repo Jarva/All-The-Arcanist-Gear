@@ -3,10 +3,10 @@ package com.github.jarva.allthearcanistgear.setup.registry;
 import com.github.jarva.allthearcanistgear.common.armor.ArcanistArmorSet;
 import com.github.jarva.allthearcanistgear.setup.config.ArmorSetConfig;
 import com.github.jarva.allthearcanistgear.setup.config.ServerConfig;
-import com.hollingsworth.arsnouveau.setup.registry.ItemRegistryWrapper;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Item;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +16,9 @@ import static com.github.jarva.allthearcanistgear.AllTheArcanistGear.MODID;
 
 public class AddonItemRegistry {
     public static final List<ArcanistArmorSet> ARMOR_SETS = new ArrayList<>();
-    public static final List<ItemRegistryWrapper<? extends Item>> REGISTERED_ITEMS = new ArrayList<>();
-    public static final List<ItemRegistryWrapper<? extends Item>> DATAGEN_ITEMS = new ArrayList<>();
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(BuiltInRegistries.ITEM, MODID);
+    public static final List<RegistryObject<? extends Item>> REGISTERED_ITEMS = new ArrayList<>();
+    public static final List<RegistryObject<? extends Item>> DATAGEN_ITEMS = new ArrayList<>();
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Registries.ITEM, MODID);
 
     public static final ArcanistArmorSet ALLTHEMODIUM = registerArmorSet(ServerConfig.ALLTHEMODIUM_CONFIG, 4);
     public static final ArcanistArmorSet VIBRANIUM = registerArmorSet(ServerConfig.VIBRANIUM_CONFIG, 5);
@@ -30,12 +30,12 @@ public class AddonItemRegistry {
         return arcanistArmorSet;
     }
 
-    public static ItemRegistryWrapper<Item> register(String name, Supplier<Item> item) {
+    public static RegistryObject<Item> register(String name, Supplier<Item> item) {
         return register(name, item, true);
     }
 
-    public static ItemRegistryWrapper<Item> register(String name, Supplier<Item> item, boolean dataGen) {
-        ItemRegistryWrapper<Item> registered = new ItemRegistryWrapper<>(ITEMS.register(name, item));
+    public static RegistryObject<Item> register(String name, Supplier<Item> item, boolean dataGen) {
+        RegistryObject<Item> registered = ITEMS.register(name, item);
         REGISTERED_ITEMS.add(registered);
         if (dataGen) DATAGEN_ITEMS.add(registered);
         return registered;
