@@ -21,7 +21,8 @@ public class ServerConfig {
             "allthemodium",
             new ArmorSetConfig.DefenseValues(4, 9, 7, 4, 4, 0),
             new ArmorSetConfig.ArcanistStats(200, 6, 6),
-            new ArmorSetConfig.Capabilities(true, true, true, false, false, false, true)
+            new ArmorSetConfig.Capabilities(true, true, true, false, false, false, true),
+            new ArmorSetConfig.BookStats(2)
         );
 
         VIBRANIUM_CONFIG = ArmorSetConfig.build(
@@ -29,7 +30,8 @@ public class ServerConfig {
             "vibranium",
             new ArmorSetConfig.DefenseValues(6, 11, 9, 6, 5, 0),
             new ArmorSetConfig.ArcanistStats(325, 9, 9),
-            new ArmorSetConfig.Capabilities(true, true, true, false, true, false, true)
+            new ArmorSetConfig.Capabilities(true, true, true, false, true, false, true),
+            new ArmorSetConfig.BookStats(5)
         );
 
         UNOBTAINIUM_CONFIG = ArmorSetConfig.build(
@@ -37,7 +39,8 @@ public class ServerConfig {
             "unobtainium",
             new ArmorSetConfig.DefenseValues(8, 13, 11, 8, 6, 0),
             new ArmorSetConfig.ArcanistStats(450, 12, 12),
-            new ArmorSetConfig.Capabilities(true, true, true, true, true, true, true)
+            new ArmorSetConfig.Capabilities(true, true, true, true, true, true, true),
+            new ArmorSetConfig.BookStats(10 )
         );
 
         BUILDER.pop();

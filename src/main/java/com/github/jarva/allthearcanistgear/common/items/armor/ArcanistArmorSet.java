@@ -1,22 +1,26 @@
-package com.github.jarva.allthearcanistgear.common.armor;
+package com.github.jarva.allthearcanistgear.common.items.armor;
 
+import com.github.jarva.allthearcanistgear.common.items.book.AddonSpellBook;
 import com.github.jarva.allthearcanistgear.setup.config.ArmorSetConfig;
 import com.github.jarva.allthearcanistgear.setup.registry.AddonItemRegistry;
+import com.hollingsworth.arsnouveau.api.spell.SpellTier;
+import com.hollingsworth.arsnouveau.common.items.SpellBook;
 import com.hollingsworth.arsnouveau.setup.registry.ItemRegistryWrapper;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.Item;
 
 public class ArcanistArmorSet {
-    private final ItemRegistryWrapper<Item> head;
-    private final ItemRegistryWrapper<Item> chest;
-    private final ItemRegistryWrapper<Item> legs;
-    private final ItemRegistryWrapper<Item> feet;
+    private final ItemRegistryWrapper<AddonArmorItem> head;
+    private final ItemRegistryWrapper<AddonArmorItem> chest;
+    private final ItemRegistryWrapper<AddonArmorItem> legs;
+    private final ItemRegistryWrapper<AddonArmorItem> feet;
+    private final ItemRegistryWrapper<SpellBook> spellbook;
+
     private final String name;
     private final int tier;
     private final ArmorSetConfig config;
 
-    public ArcanistArmorSet(ArmorSetConfig config, int tier) {
+    public ArcanistArmorSet(ArmorSetConfig config, int tier, SpellTier spellTier) {
         this.config = config;
         this.name = config.name();
         this.tier = tier;
@@ -24,6 +28,7 @@ public class ArcanistArmorSet {
         this.chest = AddonItemRegistry.register(name + "_robes", () -> new AddonArmorItem(config, ArmorItem.Type.CHESTPLATE, tier));
         this.legs = AddonItemRegistry.register(name + "_leggings", () -> new AddonArmorItem(config, ArmorItem.Type.LEGGINGS, tier));
         this.feet = AddonItemRegistry.register(name + "_boots", () -> new AddonArmorItem(config, ArmorItem.Type.BOOTS, tier));
+        this.spellbook = AddonItemRegistry.register(name + "_spell_book", () -> new AddonSpellBook(config, spellTier, tier), false);
     }
 
     public ArmorSetConfig getConfig() {
@@ -38,23 +43,27 @@ public class ArcanistArmorSet {
         return this.tier;
     }
 
-    public Item getHat() {
+    public AddonArmorItem getHat() {
         return head.get();
     }
 
-    public Item getChest() {
+    public AddonArmorItem getChest() {
         return chest.get();
     }
 
-    public Item getLegs() {
+    public AddonArmorItem getLegs() {
         return legs.get();
     }
 
-    public Item getBoots() {
+    public AddonArmorItem getBoots() {
         return feet.get();
     }
 
-    public Item getArmorFromSlot(EquipmentSlot slot) {
+    public SpellBook getSpellbook() {
+        return spellbook.get();
+    }
+
+    public AddonArmorItem getArmorFromSlot(EquipmentSlot slot) {
         return switch (slot) {
             case CHEST -> getChest();
             case LEGS -> getLegs();

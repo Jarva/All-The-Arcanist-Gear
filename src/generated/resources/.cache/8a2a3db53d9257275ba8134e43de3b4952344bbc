@@ -1,4 +1,4 @@
-// 1.21.1	2024-08-30T23:52:21.248217486	Tags for minecraft:item mod id allthearcanistgear
+// 1.21.1	2024-11-21T00:43:18.749839388	Tags for minecraft:item mod id allthearcanistgear
 36355f248546a507f4093093428deea7e7a662b0 data/allthearcanistgear/tags/item/allthemodium_smithing.json
 dca5ffa6654790a4dc73f92606cbcf900e6f11fc data/allthearcanistgear/tags/item/base_boots.json
 60e7c6eb5fbcbe3af97f7687549a9aa33a03a571 data/allthearcanistgear/tags/item/base_chest.json
@@ -8,6 +8,7 @@ dca5ffa6654790a4dc73f92606cbcf900e6f11fc data/allthearcanistgear/tags/item/base_
 e52ed69ff9b4c0403fb430ea97eec4dc74d09d64 data/allthearcanistgear/tags/item/elemental_chest.json
 e1b8531c5ff2c7ef9affefa84864f42fc42f346a data/allthearcanistgear/tags/item/elemental_hat.json
 42d6364686b084a4bba7da4a81b4ceb501eb3e2a data/allthearcanistgear/tags/item/elemental_legs.json
+3b7204f3143282df6cbea949c83a4b302d2a3bfc data/allthearcanistgear/tags/item/spellbook.json
 0bf42d5e1338cc592e2d99f552cac2c0b37f6e5f data/allthearcanistgear/tags/item/unobtainium_smithing.json
 d8c380c9670f0097720b3a01017ccb8ffb05530d data/allthearcanistgear/tags/item/vibranium_smithing.json
 ccbb6df28e75d075e91b9818ca290f110e4a021d data/c/tags/item/ingots/allthemodium.json

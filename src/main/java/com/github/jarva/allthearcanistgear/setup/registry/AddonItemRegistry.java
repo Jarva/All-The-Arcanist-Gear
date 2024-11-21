@@ -1,8 +1,9 @@
 package com.github.jarva.allthearcanistgear.setup.registry;
 
-import com.github.jarva.allthearcanistgear.common.armor.ArcanistArmorSet;
+import com.github.jarva.allthearcanistgear.common.items.armor.ArcanistArmorSet;
 import com.github.jarva.allthearcanistgear.setup.config.ArmorSetConfig;
 import com.github.jarva.allthearcanistgear.setup.config.ServerConfig;
+import com.hollingsworth.arsnouveau.api.spell.SpellTier;
 import com.hollingsworth.arsnouveau.setup.registry.ItemRegistryWrapper;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
@@ -20,22 +21,22 @@ public class AddonItemRegistry {
     public static final List<ItemRegistryWrapper<? extends Item>> DATAGEN_ITEMS = new ArrayList<>();
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(BuiltInRegistries.ITEM, MODID);
 
-    public static final ArcanistArmorSet ALLTHEMODIUM = registerArmorSet(ServerConfig.ALLTHEMODIUM_CONFIG, 4);
-    public static final ArcanistArmorSet VIBRANIUM = registerArmorSet(ServerConfig.VIBRANIUM_CONFIG, 5);
-    public static final ArcanistArmorSet UNOBTAINIUM = registerArmorSet(ServerConfig.UNOBTAINIUM_CONFIG, 6);
+    public static final ArcanistArmorSet ALLTHEMODIUM = registerArmorSet(ServerConfig.ALLTHEMODIUM_CONFIG, 4, ArsNouveauRegistry.FOUR);
+    public static final ArcanistArmorSet VIBRANIUM = registerArmorSet(ServerConfig.VIBRANIUM_CONFIG, 5, ArsNouveauRegistry.FIVE);
+    public static final ArcanistArmorSet UNOBTAINIUM = registerArmorSet(ServerConfig.UNOBTAINIUM_CONFIG, 6, ArsNouveauRegistry.SIX);
 
-    public static ArcanistArmorSet registerArmorSet(ArmorSetConfig config, int tier) {
-        ArcanistArmorSet arcanistArmorSet = new ArcanistArmorSet(config, tier);
+    public static ArcanistArmorSet registerArmorSet(ArmorSetConfig config, int tier, SpellTier spellTier) {
+        ArcanistArmorSet arcanistArmorSet = new ArcanistArmorSet(config, tier, spellTier);
         ARMOR_SETS.add(arcanistArmorSet);
         return arcanistArmorSet;
     }
 
-    public static ItemRegistryWrapper<Item> register(String name, Supplier<Item> item) {
+    public static <T extends Item> ItemRegistryWrapper<T> register(String name, Supplier<T> item) {
         return register(name, item, true);
     }
 
-    public static ItemRegistryWrapper<Item> register(String name, Supplier<Item> item, boolean dataGen) {
-        ItemRegistryWrapper<Item> registered = new ItemRegistryWrapper<>(ITEMS.register(name, item));
+    public static <T extends Item> ItemRegistryWrapper<T> register(String name, Supplier<T> item, boolean dataGen) {
+        ItemRegistryWrapper<T> registered = new ItemRegistryWrapper<>(ITEMS.register(name, item));
         REGISTERED_ITEMS.add(registered);
         if (dataGen) DATAGEN_ITEMS.add(registered);
         return registered;

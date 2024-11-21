@@ -1,7 +1,7 @@
 package com.github.jarva.allthearcanistgear.common.event;
 
 import com.github.jarva.allthearcanistgear.AllTheArcanistGear;
-import com.github.jarva.allthearcanistgear.common.armor.AddonArmorItem;
+import com.github.jarva.allthearcanistgear.common.items.armor.AddonArmorItem;
 import com.github.jarva.allthearcanistgear.setup.config.ArmorSetConfig;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageTypes;

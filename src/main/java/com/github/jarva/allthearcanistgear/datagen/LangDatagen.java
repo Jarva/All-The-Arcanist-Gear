@@ -1,6 +1,6 @@
 package com.github.jarva.allthearcanistgear.datagen;
 
-import com.github.jarva.allthearcanistgear.common.armor.ArcanistArmorSet;
+import com.github.jarva.allthearcanistgear.common.items.armor.ArcanistArmorSet;
 import com.github.jarva.allthearcanistgear.setup.registry.AddonItemRegistry;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.LanguageProvider;
@@ -21,6 +21,7 @@ public class LangDatagen extends LanguageProvider {
             this.add("item.allthearcanistgear." + set.getName() + "_robes", localizedName + " Arcanist Robes");
             this.add("item.allthearcanistgear." + set.getName() + "_leggings", localizedName + " Arcanist Leggings");
             this.add("item.allthearcanistgear." + set.getName() + "_boots", localizedName + " Arcanist Boots");
+            this.add("item.allthearcanistgear." + set.getName() + "_spell_book", localizedName + " Spell Book");
         }
     }
 }

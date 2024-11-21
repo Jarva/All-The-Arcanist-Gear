@@ -123,7 +123,7 @@ configurations {
 }
 
 dependencies {
-    implementation "com.hollingsworth.ars_nouveau:ars_nouveau-1.21.0:${project.ars_version}"
+    implementation "com.hollingsworth.ars_nouveau:ars_nouveau-1.21.1:${project.ars_version}"
     implementation "software.bernie.geckolib:geckolib-neoforge-${project.minecraft_version}:${project.gecko_version}"
     implementation "vazkii.patchouli:Patchouli:${project.mc_version}-${project.patchouli_version}"
 
@@ -135,9 +135,9 @@ dependencies {
 
     implementation "curse.maven:allthemodium-364466:5666497"
     runtimeOnly "curse.maven:ato-405593:5657484"
-    compileOnly "curse.maven:ars-elemental-561470:5652442"
+    compileOnly "curse.maven:ars-elemental-561470:5902664"
 
-    //    runtimeOnly "curse.maven:ars-elemental-561470:5652442"
+    runtimeOnly "curse.maven:ars-elemental-561470:5902664"
     //    runtimeOnly "curse.maven:polymorph-388800:5550094"
 }
 

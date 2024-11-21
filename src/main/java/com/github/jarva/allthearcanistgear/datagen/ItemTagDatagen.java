@@ -3,7 +3,7 @@ package com.github.jarva.allthearcanistgear.datagen;
 import alexthw.ars_elemental.common.items.armor.ArmorSet;
 import alexthw.ars_elemental.registry.ModItems;
 import com.github.jarva.allthearcanistgear.AllTheArcanistGear;
-import com.github.jarva.allthearcanistgear.common.armor.ArcanistArmorSet;
+import com.github.jarva.allthearcanistgear.common.items.armor.ArcanistArmorSet;
 import com.github.jarva.allthearcanistgear.setup.registry.AddonItemRegistry;
 import com.hollingsworth.arsnouveau.setup.registry.ItemsRegistry;
 import com.thevortex.allthemodium.registry.ModRegistry;
@@ -29,7 +29,6 @@ public class ItemTagDatagen extends IntrinsicHolderTagsProvider<Item> {
     public static final TagKey<Item> ELEMENTAL_CHEST = ItemTags.create(AllTheArcanistGear.prefix("elemental_chest"));
     public static final TagKey<Item> ELEMENTAL_LEGS = ItemTags.create(AllTheArcanistGear.prefix("elemental_legs"));
     public static final TagKey<Item> ELEMENTAL_BOOTS = ItemTags.create(AllTheArcanistGear.prefix("elemental_boots"));
-
 
     public static final TagKey<Item> ALLTHEMODIUM_INGOT = ItemTags.create(ResourceLocation.parse(("c:ingots/allthemodium")));
     public static final TagKey<Item> VIBRANIUM_INGOT = ItemTags.create(ResourceLocation.parse("c:ingots/vibranium"));

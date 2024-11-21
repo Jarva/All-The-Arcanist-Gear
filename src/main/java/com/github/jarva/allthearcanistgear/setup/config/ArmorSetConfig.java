@@ -1,7 +1,7 @@
 package com.github.jarva.allthearcanistgear.setup.config;
 
 import com.github.jarva.allthearcanistgear.AllTheArcanistGear;
-import com.github.jarva.allthearcanistgear.common.armor.AddonArmorItem;
+import com.github.jarva.allthearcanistgear.common.items.armor.AddonArmorItem;
 import com.hollingsworth.arsnouveau.api.perk.PerkAttributes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -32,7 +32,8 @@ public record ArmorSetConfig(
         BooleanValue preventDragonsBreath,
         BooleanValue preventWither,
         BooleanValue preventLevitation,
-        BooleanValue preventFallDamage
+        BooleanValue preventFallDamage,
+        IntValue bonusGlyphs
 ) {
     public int getDefenseBySlot(EquipmentSlot slot) {
         return switch (slot) {
@@ -81,7 +82,7 @@ public record ArmorSetConfig(
         return builder.build();
     }
 
-    public static ArmorSetConfig build(ModConfigSpec.Builder builder, String name, DefenseValues values, ArcanistStats stats, Capabilities capabilities) {
+    public static ArmorSetConfig build(ModConfigSpec.Builder builder, String name, DefenseValues values, ArcanistStats stats, Capabilities capabilities, BookStats book) {
         String localizedName = name.substring(0, 1).toUpperCase() + name.substring(1);
         builder.push(name);
         builder.define("_comment", "Config for " + localizedName + " armor");
@@ -111,10 +112,15 @@ public record ArmorSetConfig(
         BooleanValue preventFallDamage = builder.worldRestart().comment("Should Boots Prevent Fall Damage?").define("prevent_fall_damage", capabilities.preventFallDamage());
         builder.pop();
 
+        builder.push("spell_book");
+        IntValue bonusGlyphs = builder.worldRestart().comment("How many bonus glyph slots should the spell book provide?").defineInRange("bonus_glyphs", book.bonusGlyphs(), 0, 990);
+        builder.pop();
+
         ArmorSetConfig config = new ArmorSetConfig(name,
                 head, chest, legs, boots, toughness, knockback,
                 manaBoost, manaRegen, spellPower,
-                preventDrowning, preventKinetic, preventFire, preventDragonsBreath, preventWither, preventLevitation, preventFallDamage
+                preventDrowning, preventKinetic, preventFire, preventDragonsBreath, preventWither, preventLevitation, preventFallDamage,
+                bonusGlyphs
         );
         builder.pop();
         return config;
@@ -123,4 +129,5 @@ public record ArmorSetConfig(
     public record DefenseValues(int head, int chest, int legs, int boots, int toughness, double knockbackResistance) {};
     public record ArcanistStats(int manaBoost, double manaRegen, double spellPower) {};
     public record Capabilities(boolean preventDrowning, boolean preventKinetic, boolean preventFire, boolean preventDragonsBreath, boolean preventWither, boolean preventLevitation, boolean preventFallDamage) {};
+    public record BookStats(int bonusGlyphs) {};
 }

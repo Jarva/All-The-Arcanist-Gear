@@ -1,10 +1,7 @@
 package com.github.jarva.allthearcanistgear.client.renderers;
 
-import com.github.jarva.allthearcanistgear.AllTheArcanistGear;
-import com.github.jarva.allthearcanistgear.common.armor.AddonArmorItem;
-import com.hollingsworth.arsnouveau.ArsNouveau;
+import com.github.jarva.allthearcanistgear.common.items.armor.AddonArmorItem;
 import com.hollingsworth.arsnouveau.client.renderer.tile.GenericModel;
-import com.hollingsworth.arsnouveau.common.armor.AnimatedMagicArmor;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;

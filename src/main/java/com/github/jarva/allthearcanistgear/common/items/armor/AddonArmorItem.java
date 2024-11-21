@@ -1,4 +1,4 @@
-package com.github.jarva.allthearcanistgear.common.armor;
+package com.github.jarva.allthearcanistgear.common.items.armor;
 
 import com.github.jarva.allthearcanistgear.client.renderers.AddonArmorRenderer;
 import com.github.jarva.allthearcanistgear.client.renderers.AddonGenericArmorModel;

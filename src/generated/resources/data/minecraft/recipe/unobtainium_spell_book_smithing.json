@@ -1,0 +1,22 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "allthemodium"
+    }
+  ],
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "tag": "c:ingots/unobtainium"
+  },
+  "base": {
+    "item": "allthearcanistgear:vibranium_spell_book"
+  },
+  "result": {
+    "count": 1,
+    "id": "allthearcanistgear:unobtainium_spell_book"
+  },
+  "template": {
+    "tag": "allthearcanistgear:unobtainium_smithing"
+  }
+}

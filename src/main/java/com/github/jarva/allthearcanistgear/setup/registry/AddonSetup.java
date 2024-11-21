@@ -8,5 +8,6 @@ public class AddonSetup {
         AddonArmorMaterialRegistry.MATERIALS.register(eventBus);
         AddonCreativeTabRegistry.CREATIVE_MOB_TABS.register(eventBus);
         AddonIngredientTypeRegistry.INGREDIENT_TYPES.register(eventBus);
+        AddonDataComponentRegistry.DATA.register(eventBus);
     }
 }
