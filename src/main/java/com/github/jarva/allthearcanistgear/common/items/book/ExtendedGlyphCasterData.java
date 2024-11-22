@@ -31,8 +31,8 @@ public class ExtendedGlyphCasterData extends AbstractCaster<ExtendedGlyphCasterD
 
     public int bonusSlots = 0;
 
-    public ExtendedGlyphCasterData(){
-        super();
+    public ExtendedGlyphCasterData(int maxSlots){
+        super(maxSlots);
     }
 
     public ExtendedGlyphCasterData(Integer slot, String flavorText, Boolean isHidden, String hiddenText, int maxSlots, SpellSlotMap spells){

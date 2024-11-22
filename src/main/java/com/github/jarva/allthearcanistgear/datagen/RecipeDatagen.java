@@ -37,7 +37,6 @@ public class RecipeDatagen extends RecipeProvider implements IConditionBuilder {
         smithing(withElemental, set.getChest(), template, ItemTagDatagen.ELEMENTAL_CHEST, modifier, 0);
         smithing(withElemental, set.getLegs(), template, ItemTagDatagen.ELEMENTAL_LEGS, modifier, 0);
         smithing(withElemental, set.getBoots(), template, ItemTagDatagen.ELEMENTAL_BOOTS, modifier, 0);
-        smithing(withElemental, set.getBoots(), template, ItemTagDatagen.SPELLBOOK, modifier, 2);
 
         RecipeOutput withoutElemental = output.withConditions(not(elementalLoaded));
         smithing(withoutElemental, set.getHat(), template, ItemTagDatagen.BASE_HAT, modifier, 2);

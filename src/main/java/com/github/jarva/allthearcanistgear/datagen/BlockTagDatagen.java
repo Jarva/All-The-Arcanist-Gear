@@ -1,7 +1,6 @@
 package com.github.jarva.allthearcanistgear.datagen;
 
 import com.github.jarva.allthearcanistgear.AllTheArcanistGear;
-import com.thevortex.allthemodium.reference.Reference;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;

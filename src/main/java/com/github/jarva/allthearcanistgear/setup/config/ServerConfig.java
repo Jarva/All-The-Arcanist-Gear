@@ -22,7 +22,7 @@ public class ServerConfig {
             new ArmorSetConfig.DefenseValues(4, 9, 7, 4, 4, 0),
             new ArmorSetConfig.ArcanistStats(200, 6, 6),
             new ArmorSetConfig.Capabilities(true, true, true, false, false, false, true),
-            new ArmorSetConfig.BookStats(2)
+            new ArmorSetConfig.BookStats(2, 1.1f)
         );
 
         VIBRANIUM_CONFIG = ArmorSetConfig.build(
@@ -31,7 +31,7 @@ public class ServerConfig {
             new ArmorSetConfig.DefenseValues(6, 11, 9, 6, 5, 0),
             new ArmorSetConfig.ArcanistStats(325, 9, 9),
             new ArmorSetConfig.Capabilities(true, true, true, false, true, false, true),
-            new ArmorSetConfig.BookStats(5)
+            new ArmorSetConfig.BookStats(5, 1.2f)
         );
 
         UNOBTAINIUM_CONFIG = ArmorSetConfig.build(
@@ -40,7 +40,7 @@ public class ServerConfig {
             new ArmorSetConfig.DefenseValues(8, 13, 11, 8, 6, 0),
             new ArmorSetConfig.ArcanistStats(450, 12, 12),
             new ArmorSetConfig.Capabilities(true, true, true, true, true, true, true),
-            new ArmorSetConfig.BookStats(10 )
+            new ArmorSetConfig.BookStats(10, 1.3f)
         );
 
         BUILDER.pop();

@@ -33,7 +33,8 @@ public record ArmorSetConfig(
         BooleanValue preventWither,
         BooleanValue preventLevitation,
         BooleanValue preventFallDamage,
-        IntValue bonusGlyphs
+        IntValue bonusGlyphs,
+        DoubleValue bonusDamageMultiplier
 ) {
     public int getDefenseBySlot(EquipmentSlot slot) {
         return switch (slot) {
@@ -49,7 +50,7 @@ public record ArmorSetConfig(
         EquipmentSlot slot = item.getEquipmentSlot();
 
         int defense = getDefenseBySlot(slot);
-                    int toughness = toughness().get();
+        int toughness = toughness().get();
         double knockback = knockback().get();
         double maxMana = maxMana().get();
         double manaRegen = manaRegen().get();
@@ -114,13 +115,14 @@ public record ArmorSetConfig(
 
         builder.push("spell_book");
         IntValue bonusGlyphs = builder.worldRestart().comment("How many bonus glyph slots should the spell book provide?").defineInRange("bonus_glyphs", book.bonusGlyphs(), 0, 990);
+        DoubleValue bonusDamageMultiplier = builder.worldRestart().comment("What damage multiplier should be applied when `allthearcanistgear:bonus_damage` entities are hurt?").defineInRange("bonus_damage_multiplier", book.bonusDamageMultiplier(), 1.0f, 10f);
         builder.pop();
 
         ArmorSetConfig config = new ArmorSetConfig(name,
                 head, chest, legs, boots, toughness, knockback,
                 manaBoost, manaRegen, spellPower,
                 preventDrowning, preventKinetic, preventFire, preventDragonsBreath, preventWither, preventLevitation, preventFallDamage,
-                bonusGlyphs
+                bonusGlyphs, bonusDamageMultiplier
         );
         builder.pop();
         return config;
@@ -129,5 +131,5 @@ public record ArmorSetConfig(
     public record DefenseValues(int head, int chest, int legs, int boots, int toughness, double knockbackResistance) {};
     public record ArcanistStats(int manaBoost, double manaRegen, double spellPower) {};
     public record Capabilities(boolean preventDrowning, boolean preventKinetic, boolean preventFire, boolean preventDragonsBreath, boolean preventWither, boolean preventLevitation, boolean preventFallDamage) {};
-    public record BookStats(int bonusGlyphs) {};
+    public record BookStats(int bonusGlyphs, float bonusDamageMultiplier) {};
 }
