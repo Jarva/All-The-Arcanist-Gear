@@ -14,9 +14,9 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import java.util.concurrent.CompletableFuture;
 
 public class BlockTagDatagen  extends IntrinsicHolderTagsProvider<Block> {
-    public static final TagKey<Block> NEEDS_ALLTHEMODIUM_TOOL = BlockTags.create(common("needs_allthemodium_tool"));
-    public static final TagKey<Block> NEEDS_VIBRANIUM_TOOL = BlockTags.create(common("needs_vibranium_tool"));
-    public static final TagKey<Block> NEEDS_UNOBTAINIUM_TOOL = BlockTags.create(common("needs_unobtainium_tool"));
+    public static final TagKey<Block> ALLTHEMODIUM_ORE = BlockTags.create(common("ores/allthemodium"));
+    public static final TagKey<Block> VIBRANIUM_ORE = BlockTags.create(common("ores/vibranium"));
+    public static final TagKey<Block> UNOBTAINIUM_ORE = BlockTags.create(common("ores/unobtainium"));
 
     public BlockTagDatagen(PackOutput arg, CompletableFuture<HolderLookup.Provider> future, ExistingFileHelper helper) {
         super(arg, Registries.BLOCK, future, item -> item.builtInRegistryHolder().key(), AllTheArcanistGear.MODID, helper);

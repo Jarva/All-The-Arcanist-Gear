@@ -37,9 +37,9 @@ public class AddonSpellBook extends SpellBook {
 
     public boolean canBreak(SpellStats spellStats, BlockState state) {
         if (spellStats.getAmpMultiplier() < itemTier - 1) return false;
-        if (state.is(BlockTagDatagen.NEEDS_UNOBTAINIUM_TOOL) && itemTier >= 6) return true;
-        if (state.is(BlockTagDatagen.NEEDS_VIBRANIUM_TOOL) && itemTier >= 5) return true;
-        return state.is(BlockTagDatagen.NEEDS_ALLTHEMODIUM_TOOL) && itemTier >= 4;
+        if (state.is(BlockTagDatagen.UNOBTAINIUM_ORE) && itemTier >= 6) return true;
+        if (state.is(BlockTagDatagen.VIBRANIUM_ORE) && itemTier >= 5) return true;
+        return state.is(BlockTagDatagen.ALLTHEMODIUM_ORE) && itemTier >= 4;
     }
 
     @Override
