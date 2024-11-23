@@ -17,10 +17,10 @@ public class PatchouliDatagen extends com.hollingsworth.arsnouveau.common.datage
 
     @Override
     public void collectJsons(CachedOutput cache) {
-        addPage(new PatchouliBuilder(EQUIPMENT, AddonItemRegistry.ALLTHEMODIUM.getHat())
-                        .withTextPage("allthearcanistgear.page.allthemodium"),
-                getPath(EQUIPMENT, "allthemodium")
-        );
+//        addPage(new PatchouliBuilder(EQUIPMENT, AddonItemRegistry.ALLTHEMODIUM.getHat())
+//                        .withTextPage("allthearcanistgear.page.allthemodium"),
+//                getPath(EQUIPMENT, "allthemodium")
+//        );
 
         for (PatchouliPage patchouliPage : pages) {
             saveStable(cache, patchouliPage.build(), patchouliPage.path());

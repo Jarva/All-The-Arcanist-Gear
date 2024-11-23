@@ -3,15 +3,22 @@
     {
       "type": "neoforge:mod_loaded",
       "modid": "allthemodium"
+    },
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:mod_loaded",
+        "modid": "ars_elemental"
+      }
     }
   ],
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "allthearcanistgear:has_ingots/vibranium_ingot": {
+    "allthearcanistgear:has_ingots/allthemodium_ingot": {
       "conditions": {
         "items": [
           {
-            "items": "#c:ingots/vibranium"
+            "items": "#c:ingots/allthemodium"
           }
         ]
       },
@@ -19,7 +26,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:vibranium_spell_book_smithing"
+        "recipe": "allthearcanistgear:base_boots_to_allthemodium_boots_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -27,12 +34,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "allthearcanistgear:has_ingots/vibranium_ingot"
+      "allthearcanistgear:has_ingots/allthemodium_ingot"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:vibranium_spell_book_smithing"
+      "allthearcanistgear:base_boots_to_allthemodium_boots_smithing"
     ]
   }
 }

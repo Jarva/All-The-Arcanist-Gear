@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:elemental_boots_to_allthemodium_boots_smithing"
+        "recipe": "allthearcanistgear:elemental_hat_to_allthemodium_hat_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -36,7 +36,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:elemental_boots_to_allthemodium_boots_smithing"
+      "allthearcanistgear:elemental_hat_to_allthemodium_hat_smithing"
     ]
   }
 }

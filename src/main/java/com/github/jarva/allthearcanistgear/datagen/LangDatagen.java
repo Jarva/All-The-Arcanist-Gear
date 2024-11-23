@@ -23,5 +23,8 @@ public class LangDatagen extends LanguageProvider {
             this.add("item.allthearcanistgear." + set.getName() + "_boots", localizedName + " Arcanist Boots");
             this.add("item.allthearcanistgear." + set.getName() + "_spell_book", localizedName + " Spell Book");
         }
+
+        this.add("chat.allthearcanistgear.too_weak", "Breaking this block requires more amplification.");
+        this.add("chat.allthearcanistgear.low_tier", "Breaking this block requires a more powerful spell book.");
     }
 }

@@ -7,11 +7,11 @@
   ],
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "allthearcanistgear:has_ingots/vibranium_ingot": {
+    "allthearcanistgear:has_ingots/allthemodium_ingot": {
       "conditions": {
         "items": [
           {
-            "items": "#c:ingots/vibranium"
+            "items": "#c:ingots/allthemodium"
           }
         ]
       },
@@ -19,7 +19,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:vibranium_robes_smithing"
+        "recipe": "allthearcanistgear:allthemodium_spell_book_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -27,12 +27,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "allthearcanistgear:has_ingots/vibranium_ingot"
+      "allthearcanistgear:has_ingots/allthemodium_ingot"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:vibranium_robes_smithing"
+      "allthearcanistgear:allthemodium_spell_book_smithing"
     ]
   }
 }

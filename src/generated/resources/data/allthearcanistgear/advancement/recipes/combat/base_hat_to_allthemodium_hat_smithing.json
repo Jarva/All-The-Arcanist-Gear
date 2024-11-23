@@ -26,7 +26,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:base_chest_to_allthemodium_robes_smithing"
+        "recipe": "allthearcanistgear:base_hat_to_allthemodium_hat_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -39,7 +39,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:base_chest_to_allthemodium_robes_smithing"
+      "allthearcanistgear:base_hat_to_allthemodium_hat_smithing"
     ]
   }
 }

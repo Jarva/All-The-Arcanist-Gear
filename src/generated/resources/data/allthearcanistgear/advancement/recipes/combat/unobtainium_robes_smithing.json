@@ -19,7 +19,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:unobtainium_leggings_smithing"
+        "recipe": "allthearcanistgear:unobtainium_robes_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -32,7 +32,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:unobtainium_leggings_smithing"
+      "allthearcanistgear:unobtainium_robes_smithing"
     ]
   }
 }

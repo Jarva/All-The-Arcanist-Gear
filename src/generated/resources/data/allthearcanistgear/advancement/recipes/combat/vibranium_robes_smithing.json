@@ -3,19 +3,15 @@
     {
       "type": "neoforge:mod_loaded",
       "modid": "allthemodium"
-    },
-    {
-      "type": "neoforge:mod_loaded",
-      "modid": "ars_elemental"
     }
   ],
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "allthearcanistgear:has_ingots/allthemodium_ingot": {
+    "allthearcanistgear:has_ingots/vibranium_ingot": {
       "conditions": {
         "items": [
           {
-            "items": "#c:ingots/allthemodium"
+            "items": "#c:ingots/vibranium"
           }
         ]
       },
@@ -23,7 +19,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:elemental_hat_to_allthemodium_hat_smithing"
+        "recipe": "allthearcanistgear:vibranium_robes_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -31,12 +27,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "allthearcanistgear:has_ingots/allthemodium_ingot"
+      "allthearcanistgear:has_ingots/vibranium_ingot"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:elemental_hat_to_allthemodium_hat_smithing"
+      "allthearcanistgear:vibranium_robes_smithing"
     ]
   }
 }

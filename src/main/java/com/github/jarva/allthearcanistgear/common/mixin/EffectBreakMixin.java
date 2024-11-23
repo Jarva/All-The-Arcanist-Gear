@@ -19,7 +19,10 @@ public class EffectBreakMixin {
     private boolean onResolveBlock(EffectBreak instance, SpellStats spellStats, Level level, BlockPos blockPos, Operation<Boolean> original, @Local(argsOnly = true) SpellContext spellContext) {
         if (spellContext.getCasterTool().getItem() instanceof AddonSpellBook addonSpellBook) {
             BlockState state = level.getBlockState(blockPos);
-            return addonSpellBook.canBreak(spellStats, state);
+            Boolean canBreak = addonSpellBook.canBreak(spellStats, state, spellContext.getUnwrappedCaster());
+            if (canBreak != null) {
+                return canBreak;
+            }
         }
         return original.call(instance, spellStats, level, blockPos);
     }

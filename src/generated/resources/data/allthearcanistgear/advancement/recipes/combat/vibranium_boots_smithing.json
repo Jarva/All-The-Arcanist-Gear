@@ -7,11 +7,11 @@
   ],
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "allthearcanistgear:has_ingots/unobtainium_ingot": {
+    "allthearcanistgear:has_ingots/vibranium_ingot": {
       "conditions": {
         "items": [
           {
-            "items": "#c:ingots/unobtainium"
+            "items": "#c:ingots/vibranium"
           }
         ]
       },
@@ -19,7 +19,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:unobtainium_robes_smithing"
+        "recipe": "allthearcanistgear:vibranium_boots_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -27,12 +27,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "allthearcanistgear:has_ingots/unobtainium_ingot"
+      "allthearcanistgear:has_ingots/vibranium_ingot"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:unobtainium_robes_smithing"
+      "allthearcanistgear:vibranium_boots_smithing"
     ]
   }
 }

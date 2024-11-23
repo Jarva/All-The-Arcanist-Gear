@@ -19,7 +19,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:vibranium_hat_smithing"
+        "recipe": "allthearcanistgear:vibranium_hat_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -32,7 +32,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:vibranium_hat_smithing"
+      "allthearcanistgear:vibranium_hat_smithing"
     ]
   }
 }

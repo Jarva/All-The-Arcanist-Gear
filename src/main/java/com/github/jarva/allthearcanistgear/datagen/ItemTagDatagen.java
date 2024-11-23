@@ -89,15 +89,6 @@ public class ItemTagDatagen extends IntrinsicHolderTagsProvider<Item> {
         this.tag(UNOBTAINIUM_SMITHING_TEMPLATE)
                 .addOptional(key(ModRegistry.UNO_SMITHING.get()));
 
-        this.tag(ALLTHEMODIUM_INGOT)
-                .addOptional(key(ModRegistry.ALLTHEMODIUM_INGOT.get()));
-
-        this.tag(VIBRANIUM_INGOT)
-                .addOptional(key(ModRegistry.VIBRANIUM_INGOT.get()));
-
-        this.tag(UNOBTAINIUM_INGOT)
-                .addOptional(key(ModRegistry.UNOBTAINIUM_INGOT.get()));
-
         for (ArcanistArmorSet arcanistArmorSet : AddonItemRegistry.ARMOR_SETS) {
             addArmorTags(arcanistArmorSet);
         }

@@ -3,6 +3,10 @@
     {
       "type": "neoforge:mod_loaded",
       "modid": "allthemodium"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "ars_elemental"
     }
   ],
   "parent": "minecraft:recipes/root",
@@ -19,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:allthemodium_spell_book_smithing"
+        "recipe": "allthearcanistgear:elemental_legs_to_allthemodium_leggings_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -32,7 +36,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:allthemodium_spell_book_smithing"
+      "allthearcanistgear:elemental_legs_to_allthemodium_leggings_smithing"
     ]
   }
 }

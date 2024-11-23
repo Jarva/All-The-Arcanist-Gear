@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:elemental_legs_to_allthemodium_leggings_smithing"
+        "recipe": "allthearcanistgear:elemental_boots_to_allthemodium_boots_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -36,7 +36,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:elemental_legs_to_allthemodium_leggings_smithing"
+      "allthearcanistgear:elemental_boots_to_allthemodium_boots_smithing"
     ]
   }
 }

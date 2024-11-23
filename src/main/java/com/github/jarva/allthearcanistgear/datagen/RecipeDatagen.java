@@ -8,6 +8,7 @@ import com.hollingsworth.arsnouveau.setup.registry.ItemsRegistry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -67,7 +68,7 @@ public class RecipeDatagen extends RecipeProvider implements IConditionBuilder {
                 Ingredient.of(modifier),
                 RecipeCategory.COMBAT,
                 armor
-        ).unlocks(AllTheArcanistGear.MODID + ":has_" + modifier.location().getPath() + "_ingot", has(modifier)).save(output, getItemName(armor) + "_smithing");
+        ).unlocks(AllTheArcanistGear.MODID + ":has_" + modifier.location().getPath() + "_ingot", has(modifier)).save(output, r(getItemName(armor) + "_smithing"));
     }
 
     private void smithing(RecipeOutput output, Item armor, TagKey<Item> template, TagKey<Item> base, TagKey<Item> modifier, int tier) {
@@ -81,6 +82,10 @@ public class RecipeDatagen extends RecipeProvider implements IConditionBuilder {
                 Ingredient.of(modifier),
                 RecipeCategory.COMBAT,
                 item
-        ).unlocks(AllTheArcanistGear.MODID + ":has_" + modifier.location().getPath() + "_ingot", has(modifier)).save(output, baseName + "_to_" + getItemName(item) + "_smithing");
+        ).unlocks(AllTheArcanistGear.MODID + ":has_" + modifier.location().getPath() + "_ingot", has(modifier)).save(output, r(baseName + "_to_" + getItemName(item) + "_smithing"));
+    }
+
+    private ResourceLocation r(String id) {
+        return AllTheArcanistGear.prefix(id);
     }
 }

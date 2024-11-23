@@ -19,7 +19,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:unobtainium_spell_book_smithing"
+        "recipe": "allthearcanistgear:unobtainium_spell_book_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -32,7 +32,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:unobtainium_spell_book_smithing"
+      "allthearcanistgear:unobtainium_spell_book_smithing"
     ]
   }
 }
