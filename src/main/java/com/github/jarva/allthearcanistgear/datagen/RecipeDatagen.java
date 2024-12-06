@@ -28,6 +28,11 @@ public class RecipeDatagen extends RecipeProvider implements IConditionBuilder {
         smithing(withATM, AddonItemRegistry.ALLTHEMODIUM, ItemTagDatagen.ALLTHEMODIUM_SMITHING_TEMPLATE, ItemTagDatagen.ALLTHEMODIUM_INGOT);
         smithing(withATM, AddonItemRegistry.VIBRANIUM, ItemTagDatagen.VIBRANIUM_SMITHING_TEMPLATE, AddonItemRegistry.ALLTHEMODIUM, ItemTagDatagen.VIBRANIUM_INGOT);
         smithing(withATM, AddonItemRegistry.UNOBTAINIUM, ItemTagDatagen.UNOBTAINIUM_SMITHING_TEMPLATE, AddonItemRegistry.VIBRANIUM, ItemTagDatagen.UNOBTAINIUM_INGOT);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, AddonItemRegistry.CREATIVE)
+                .requires(ItemsRegistry.CREATIVE_SPELLBOOK)
+                .unlockedBy("has_creative_spellbook", has(ItemsRegistry.CREATIVE_SPELLBOOK))
+                .save(output);
     }
 
     private void smithing(RecipeOutput output, ArcanistArmorSet set, TagKey<Item> template, TagKey<Item> modifier) {

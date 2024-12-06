@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "ars_nouveau:creative_spell_book"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "allthearcanistgear:creative_spell_book"
+  }
+}

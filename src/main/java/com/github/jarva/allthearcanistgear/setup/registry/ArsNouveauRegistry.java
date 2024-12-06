@@ -28,6 +28,7 @@ public class ArsNouveauRegistry {
             SpellBook spellBook = armorSet.getSpellbook();
             SpellCasterRegistry.register(spellBook, (stack) -> stack.get(AddonDataComponentRegistry.EXTENDED_GLYPH_CASTER));
         }
+        SpellCasterRegistry.register(AddonItemRegistry.CREATIVE.get(), (stack) -> stack.get(AddonDataComponentRegistry.EXTENDED_GLYPH_CASTER));
     }
 
     private static void addPerkSlots() {

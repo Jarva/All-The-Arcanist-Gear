@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_creative_spellbook": {
+      "conditions": {
+        "items": [
+          {
+            "items": "ars_nouveau:creative_spell_book"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "allthearcanistgear:creative_spell_book"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_creative_spellbook"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "allthearcanistgear:creative_spell_book"
+    ]
+  }
+}

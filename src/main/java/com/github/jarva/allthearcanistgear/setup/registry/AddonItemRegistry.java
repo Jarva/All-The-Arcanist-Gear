@@ -1,6 +1,7 @@
 package com.github.jarva.allthearcanistgear.setup.registry;
 
 import com.github.jarva.allthearcanistgear.common.items.armor.ArcanistArmorSet;
+import com.github.jarva.allthearcanistgear.common.items.book.AddonSpellBook;
 import com.github.jarva.allthearcanistgear.setup.config.ArmorSetConfig;
 import com.github.jarva.allthearcanistgear.setup.config.ServerConfig;
 import com.hollingsworth.arsnouveau.api.spell.SpellTier;
@@ -24,6 +25,7 @@ public class AddonItemRegistry {
     public static final ArcanistArmorSet ALLTHEMODIUM = registerArmorSet(ServerConfig.ALLTHEMODIUM_CONFIG, 4, ArsNouveauRegistry.FOUR);
     public static final ArcanistArmorSet VIBRANIUM = registerArmorSet(ServerConfig.VIBRANIUM_CONFIG, 5, ArsNouveauRegistry.FIVE);
     public static final ArcanistArmorSet UNOBTAINIUM = registerArmorSet(ServerConfig.UNOBTAINIUM_CONFIG, 6, ArsNouveauRegistry.SIX);
+    public static final ItemRegistryWrapper<AddonSpellBook> CREATIVE = register("creative_spell_book", () -> new AddonSpellBook(UNOBTAINIUM.getConfig(), SpellTier.CREATIVE, 99), false);
 
     public static ArcanistArmorSet registerArmorSet(ArmorSetConfig config, int tier, SpellTier spellTier) {
         ArcanistArmorSet arcanistArmorSet = new ArcanistArmorSet(config, tier, spellTier);
