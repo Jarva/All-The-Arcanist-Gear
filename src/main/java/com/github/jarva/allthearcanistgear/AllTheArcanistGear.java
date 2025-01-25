@@ -21,6 +21,7 @@ public class AllTheArcanistGear {
         AddonSetup.register(modEventBus);
         modContainer.registerConfig(ModConfig.Type.SERVER, ServerConfig.SPEC);
 
+        ArsNouveauRegistry.init();
         modEventBus.addListener(this::setup);
     }
 

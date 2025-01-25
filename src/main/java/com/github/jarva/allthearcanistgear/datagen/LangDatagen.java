@@ -1,7 +1,11 @@
 package com.github.jarva.allthearcanistgear.datagen;
 
+import com.github.jarva.allthearcanistgear.AllTheArcanistGear;
 import com.github.jarva.allthearcanistgear.common.items.armor.ArcanistArmorSet;
 import com.github.jarva.allthearcanistgear.setup.registry.AddonItemRegistry;
+import com.hollingsworth.arsnouveau.ArsNouveau;
+import com.hollingsworth.arsnouveau.api.registry.PerkRegistry;
+import com.hollingsworth.arsnouveau.common.items.PerkItem;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 
@@ -28,5 +32,14 @@ public class LangDatagen extends LanguageProvider {
 
         this.add("chat.allthearcanistgear.too_weak", "Breaking this block requires more amplification.");
         this.add("chat.allthearcanistgear.low_tier", "Breaking this block requires a more powerful spell book.");
+
+        add("allthearcanistgear.thread_of", "Thread of %s");
+
+        for (PerkItem i : PerkRegistry.getPerkItemMap().values()) {
+            if(i.perk.getRegistryName().getNamespace().equals(AllTheArcanistGear.MODID)) {
+                add("allthearcanistgear.perk_desc." + i.perk.getRegistryName().getPath(), i.perk.getLangDescription());
+                add("item.allthearcanistgear." + i.perk.getRegistryName().getPath(), i.perk.getLangName());
+            }
+        }
     }
 }

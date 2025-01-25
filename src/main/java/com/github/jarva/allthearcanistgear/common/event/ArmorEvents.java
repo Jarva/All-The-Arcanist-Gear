@@ -50,7 +50,7 @@ public class ArmorEvents {
         processArmorEvent(entity, EquipmentSlot.LEGS, () -> instance.is(MobEffects.LEVITATION), ArmorSetConfig::preventLevitation, () -> event.setResult(MobEffectEvent.Applicable.Result.DO_NOT_APPLY));
     }
 
-    private static void processArmorEvent(LivingEntity entity, EquipmentSlot slot, Supplier<Boolean> predicate, Function<ArmorSetConfig, Supplier<Boolean>> configFn, Runnable cancel) {
+    public static void processArmorEvent(LivingEntity entity, EquipmentSlot slot, Supplier<Boolean> predicate, Function<ArmorSetConfig, Supplier<Boolean>> configFn, Runnable cancel) {
         if (entity.getItemBySlot(slot).getItem() instanceof AddonArmorItem armorItem && configFn.apply(armorItem.getConfig()).get() && predicate.get()) {
             cancel.run();
         }

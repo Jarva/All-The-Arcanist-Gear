@@ -1,0 +1,23 @@
+{
+  "type": "ars_nouveau:enchanting_apparatus",
+  "keepNbtOfReagent": false,
+  "pedestalItems": [
+    {
+      "item": "minecraft:enchanted_golden_apple"
+    },
+    {
+      "item": "minecraft:glistering_melon_slice"
+    },
+    {
+      "item": "minecraft:glistering_melon_slice"
+    }
+  ],
+  "reagent": {
+    "item": "ars_nouveau:blank_thread"
+  },
+  "result": {
+    "count": 1,
+    "id": "allthearcanistgear:thread_vitality"
+  },
+  "sourceCost": 0
+}

@@ -1,8 +1,12 @@
-// 1.21.1	2024-08-29T12:32:38.635791102	Item Models: allthearcanistgear
+// 1.21.1	2025-01-20T18:31:04.958288147	Item Models: allthearcanistgear
 056401296c9fc8f1e4ab77582e292cf6cd622078 assets/allthearcanistgear/models/item/allthemodium_boots.json
 1a4bef174c6383c32386015046b06135a9f5fd9b assets/allthearcanistgear/models/item/allthemodium_hat.json
 bfcc422b9058c352e4735a86432317a334208ceb assets/allthearcanistgear/models/item/allthemodium_leggings.json
 877e9c5892ffaa2b15cf47ef8e1680b09d1d34ad assets/allthearcanistgear/models/item/allthemodium_robes.json
+fa2db7c8938ea8ee4ac6ee502bf7afcc68e19c58 assets/allthearcanistgear/models/item/thread_flight.json
+5dac98b5ef514f655be7724df4e6995762799ec0 assets/allthearcanistgear/models/item/thread_spectral_sight.json
+6cab0f287cb52b1c6773f03423e9dac5490bb63e assets/allthearcanistgear/models/item/thread_truesight.json
+6e5b71ba6072ca3d68e3fb5af486fb61be85eefc assets/allthearcanistgear/models/item/thread_vitality.json
 89eacc7bd230f2479f54a22c1f8af126889d824e assets/allthearcanistgear/models/item/unobtainium_boots.json
 74540f0c67fc9f0196608a4190039743980bceba assets/allthearcanistgear/models/item/unobtainium_hat.json
 da2db09a321d91e9528dd06d42bc0701c1deb710 assets/allthearcanistgear/models/item/unobtainium_leggings.json

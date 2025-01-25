@@ -135,10 +135,16 @@ dependencies {
 
     implementation "curse.maven:allthemodium-364466:5895131"
     runtimeOnly "curse.maven:ato-405593:5735707"
-    compileOnly "curse.maven:ars-elemental-561470:5902664"
+    compileOnly "com.alexthw.ars_elemental:ars_elemental-1.21.1:0.7.2.0.46"
 
-    runtimeOnly "curse.maven:ars-elemental-561470:5902664"
+    runtimeOnly "com.alexthw.ars_elemental:ars_elemental-1.21.1:0.7.2.0.46"
     //    runtimeOnly "curse.maven:polymorph-388800:5550094"
+
+    jarJar(implementation("maven.modrinth:AdditionalEntityAttributes")) {
+        version {
+            prefer '2.0.0+1.21.1-neoforge'
+        }
+    }
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {

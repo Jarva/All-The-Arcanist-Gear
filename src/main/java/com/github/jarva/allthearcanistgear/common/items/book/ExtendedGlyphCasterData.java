@@ -2,6 +2,7 @@ package com.github.jarva.allthearcanistgear.common.items.book;
 
 import com.github.jarva.allthearcanistgear.setup.registry.AddonDataComponentRegistry;
 import com.hollingsworth.arsnouveau.api.spell.AbstractCaster;
+import com.hollingsworth.arsnouveau.api.spell.SpellCaster;
 import com.hollingsworth.arsnouveau.api.spell.SpellSlotMap;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
@@ -33,6 +34,10 @@ public class ExtendedGlyphCasterData extends AbstractCaster<ExtendedGlyphCasterD
 
     public ExtendedGlyphCasterData(int maxSlots){
         super(maxSlots);
+    }
+
+    public ExtendedGlyphCasterData(int maxSlots, SpellCaster data){
+        super(data.getCurrentSlot(), data.getFlavorText(), data.isSpellHidden(), data.getFlavorText(), maxSlots, data.getSpells());
     }
 
     public ExtendedGlyphCasterData(Integer slot, String flavorText, Boolean isHidden, String hiddenText, int maxSlots, SpellSlotMap spells){

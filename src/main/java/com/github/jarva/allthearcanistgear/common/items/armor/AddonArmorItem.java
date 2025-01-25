@@ -4,19 +4,25 @@ import com.github.jarva.allthearcanistgear.client.renderers.AddonArmorRenderer;
 import com.github.jarva.allthearcanistgear.client.renderers.AddonGenericArmorModel;
 import com.github.jarva.allthearcanistgear.setup.config.ArmorSetConfig;
 import com.github.jarva.allthearcanistgear.setup.registry.AddonArmorMaterialRegistry;
+import com.hollingsworth.arsnouveau.api.perk.ITickablePerk;
 import com.hollingsworth.arsnouveau.api.perk.PerkInstance;
+import com.hollingsworth.arsnouveau.api.util.PerkUtil;
 import com.hollingsworth.arsnouveau.client.renderer.tile.GenericModel;
 import com.hollingsworth.arsnouveau.common.items.data.ArmorPerkHolder;
+import com.hollingsworth.arsnouveau.common.perk.RepairingPerk;
 import com.hollingsworth.arsnouveau.setup.registry.DataComponentRegistry;
 import com.hollingsworth.arsnouveau.setup.registry.ItemsRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.client.GeoRenderProvider;
@@ -87,6 +93,24 @@ public class AddonArmorItem extends ArmorItem implements GeoItem {
         if (data != null) {
             tooltipComponents.add(Component.translatable("ars_nouveau.tier", data.getTier() + 1).withStyle(ChatFormatting.GOLD));
             data.appendPerkTooltip(tooltipComponents, stack);
+        }
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
+        if (level.isClientSide()) return;
+        if (slotId < Inventory.INVENTORY_SIZE || slotId >= Inventory.INVENTORY_SIZE + 4) return;
+
+        if (!(entity instanceof LivingEntity livingEntity)) return;
+
+        RepairingPerk.attemptRepair(stack, livingEntity);
+        var perkHolder = PerkUtil.getPerkHolder(stack);
+        if (perkHolder == null)
+            return;
+        for (PerkInstance instance : perkHolder.getPerkInstances(stack)) {
+            if (instance.getPerk() instanceof ITickablePerk tickablePerk) {
+                tickablePerk.tick(stack, level, livingEntity, instance);
+            }
         }
     }
 

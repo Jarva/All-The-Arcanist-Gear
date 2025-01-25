@@ -6,10 +6,12 @@ import com.github.jarva.allthearcanistgear.setup.config.ArmorSetConfig;
 import com.github.jarva.allthearcanistgear.setup.config.ServerConfig;
 import com.github.jarva.allthearcanistgear.setup.registry.AddonDataComponentRegistry;
 import com.hollingsworth.arsnouveau.api.ANFakePlayer;
+import com.hollingsworth.arsnouveau.api.spell.SpellCaster;
 import com.hollingsworth.arsnouveau.api.spell.SpellStats;
 import com.hollingsworth.arsnouveau.api.spell.SpellTier;
 import com.hollingsworth.arsnouveau.common.items.SpellBook;
 import com.hollingsworth.arsnouveau.common.util.PortUtil;
+import com.hollingsworth.arsnouveau.setup.registry.DataComponentRegistry;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,6 +19,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.client.GeoRenderProvider;
 
 import java.util.function.Consumer;
@@ -68,10 +71,13 @@ public class AddonSpellBook extends SpellBook {
     @Override
     public void verifyComponentsAfterLoad(ItemStack stack) {
         stack.update(AddonDataComponentRegistry.EXTENDED_GLYPH_CASTER, new ExtendedGlyphCasterData(MAX_SLOTS), data -> {
+            @Nullable SpellCaster existing = stack.get(DataComponentRegistry.SPELL_CASTER);
+            stack.remove(DataComponentRegistry.SPELL_CASTER);
+            ExtendedGlyphCasterData updated = existing != null ? new ExtendedGlyphCasterData(data.getMaxSlots(), existing) : data;
             if (ServerConfig.SPEC.isLoaded()) {
-                data.bonusSlots = config.bonusGlyphs().get();
+                updated.bonusSlots = config.bonusGlyphs().get();
             }
-            return data;
+            return updated;
         });
     }
 
