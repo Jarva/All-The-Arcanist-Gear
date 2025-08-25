@@ -3,6 +3,7 @@ package com.github.jarva.allthearcanistgear.common.items.book;
 import com.github.jarva.allthearcanistgear.client.renderers.AddonSpellBookRenderer;
 import com.github.jarva.allthearcanistgear.datagen.BlockTagDatagen;
 import com.github.jarva.allthearcanistgear.setup.config.ArmorSetConfig;
+import com.github.jarva.allthearcanistgear.setup.config.ArmorSetConfig.SpellbookConfig;
 import com.github.jarva.allthearcanistgear.setup.config.ServerConfig;
 import com.github.jarva.allthearcanistgear.setup.registry.AddonDataComponentRegistry;
 import com.hollingsworth.arsnouveau.api.ANFakePlayer;
@@ -25,17 +26,17 @@ import software.bernie.geckolib.animatable.client.GeoRenderProvider;
 import java.util.function.Consumer;
 
 public class AddonSpellBook extends SpellBook {
-    private final ArmorSetConfig config;
+    private final SpellbookConfig config;
     private final int itemTier;
     private static final int MAX_SLOTS = 10;
 
-    public AddonSpellBook(ArmorSetConfig config, SpellTier spellTier, int tier) {
+    public AddonSpellBook(SpellbookConfig config, SpellTier spellTier, int tier) {
         super(new Item.Properties().stacksTo(1).component(AddonDataComponentRegistry.EXTENDED_GLYPH_CASTER, new ExtendedGlyphCasterData(MAX_SLOTS)), spellTier);
         this.config = config;
         this.itemTier = tier;
     }
 
-    public ArmorSetConfig getConfig() {
+    public SpellbookConfig getConfig() {
         return config;
     }
 

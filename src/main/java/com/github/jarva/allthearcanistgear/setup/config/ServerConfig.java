@@ -12,6 +12,8 @@ public class ServerConfig {
     public static ArmorSetConfig VIBRANIUM_CONFIG;
     public static ArmorSetConfig UNOBTAINIUM_CONFIG;
 
+    public static ArmorSetConfig.SpellbookConfig CREATIVE_SPELLBOOK_CONFIG;
+
     static {
         BUILDER.push("armor_config");
         BUILDER.define("_comment", "A world restart is needed after changing these config options.");
@@ -41,6 +43,13 @@ public class ServerConfig {
             new ArmorSetConfig.ArcanistStats(450, 12, 12),
             new ArmorSetConfig.Capabilities(true, true, true, true, true, true, true),
             new ArmorSetConfig.BookStats(10, 1.3f)
+        );
+
+        CREATIVE_SPELLBOOK_CONFIG = ArmorSetConfig.SpellbookConfig.build(
+                BUILDER,
+                "creative",
+                "unobtainium",
+                new ArmorSetConfig.BookStats(10, 1.3f)
         );
 
         BUILDER.pop();

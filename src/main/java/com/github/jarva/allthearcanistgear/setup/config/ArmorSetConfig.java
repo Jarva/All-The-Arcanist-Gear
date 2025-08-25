@@ -33,9 +33,27 @@ public record ArmorSetConfig(
         BooleanValue preventWither,
         BooleanValue preventLevitation,
         BooleanValue preventFallDamage,
-        IntValue bonusGlyphs,
-        DoubleValue bonusDamageMultiplier
+        SpellbookConfig spellbookConfig
 ) {
+    public record SpellbookConfig(
+            String name,
+            IntValue bonusGlyphs,
+            DoubleValue bonusDamageMultiplier
+    ) {
+        public static SpellbookConfig build(ModConfigSpec.Builder builder, String name, String model, BookStats book) {
+            String localizedName = name.substring(0, 1).toUpperCase() + name.substring(1);
+            builder.push(name + "_spellbook");
+            builder.define("_comment", "Config for " + localizedName + " spellbook");
+
+            IntValue bonusGlyphs = builder.worldRestart().comment("How many bonus glyph slots should the spell book provide?").defineInRange("bonus_glyphs", book.bonusGlyphs(), 0, 990);
+            DoubleValue bonusDamageMultiplier = builder.worldRestart().comment("What damage multiplier should be applied when `allthearcanistgear:bonus_damage` entities are hurt?").defineInRange("bonus_damage_multiplier", book.bonusDamageMultiplier(), 1.0f, 10f);
+
+            builder.pop();
+
+            return new SpellbookConfig(model, bonusGlyphs, bonusDamageMultiplier);
+        }
+    }
+
     public int getDefenseBySlot(EquipmentSlot slot) {
         return switch (slot) {
             case HEAD -> head().get();
@@ -113,16 +131,13 @@ public record ArmorSetConfig(
         BooleanValue preventFallDamage = builder.worldRestart().comment("Should Boots Prevent Fall Damage?").define("prevent_fall_damage", capabilities.preventFallDamage());
         builder.pop();
 
-        builder.push("spell_book");
-        IntValue bonusGlyphs = builder.worldRestart().comment("How many bonus glyph slots should the spell book provide?").defineInRange("bonus_glyphs", book.bonusGlyphs(), 0, 990);
-        DoubleValue bonusDamageMultiplier = builder.worldRestart().comment("What damage multiplier should be applied when `allthearcanistgear:bonus_damage` entities are hurt?").defineInRange("bonus_damage_multiplier", book.bonusDamageMultiplier(), 1.0f, 10f);
-        builder.pop();
+        SpellbookConfig spellbookConfig = SpellbookConfig.build(builder, name, name, book);
 
         ArmorSetConfig config = new ArmorSetConfig(name,
                 head, chest, legs, boots, toughness, knockback,
                 manaBoost, manaRegen, spellPower,
                 preventDrowning, preventKinetic, preventFire, preventDragonsBreath, preventWither, preventLevitation, preventFallDamage,
-                bonusGlyphs, bonusDamageMultiplier
+                spellbookConfig
         );
         builder.pop();
         return config;

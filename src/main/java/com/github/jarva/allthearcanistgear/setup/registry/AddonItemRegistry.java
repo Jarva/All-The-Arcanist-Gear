@@ -25,7 +25,7 @@ public class AddonItemRegistry {
     public static final ArcanistArmorSet ALLTHEMODIUM = registerArmorSet(ServerConfig.ALLTHEMODIUM_CONFIG, 4, ArsNouveauRegistry.SPELL_FOUR);
     public static final ArcanistArmorSet VIBRANIUM = registerArmorSet(ServerConfig.VIBRANIUM_CONFIG, 5, ArsNouveauRegistry.SPELL_FIVE);
     public static final ArcanistArmorSet UNOBTAINIUM = registerArmorSet(ServerConfig.UNOBTAINIUM_CONFIG, 6, ArsNouveauRegistry.SPELL_SIX);
-    public static final ItemRegistryWrapper<AddonSpellBook> CREATIVE = register("creative_spell_book", () -> new AddonSpellBook(UNOBTAINIUM.getConfig(), SpellTier.CREATIVE, 99), false);
+    public static final ItemRegistryWrapper<AddonSpellBook> CREATIVE = register("creative_spell_book", () -> new AddonSpellBook(ServerConfig.CREATIVE_SPELLBOOK_CONFIG, SpellTier.CREATIVE, 99), false);
 
     public static ArcanistArmorSet registerArmorSet(ArmorSetConfig config, int tier, SpellTier spellTier) {
         ArcanistArmorSet arcanistArmorSet = new ArcanistArmorSet(config, tier, spellTier);

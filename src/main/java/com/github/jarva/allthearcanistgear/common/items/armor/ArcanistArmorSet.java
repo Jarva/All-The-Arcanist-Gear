@@ -28,7 +28,7 @@ public class ArcanistArmorSet {
         this.chest = AddonItemRegistry.register(name + "_robes", () -> new AddonArmorItem(config, ArmorItem.Type.CHESTPLATE, tier));
         this.legs = AddonItemRegistry.register(name + "_leggings", () -> new AddonArmorItem(config, ArmorItem.Type.LEGGINGS, tier));
         this.feet = AddonItemRegistry.register(name + "_boots", () -> new AddonArmorItem(config, ArmorItem.Type.BOOTS, tier));
-        this.spellbook = AddonItemRegistry.register(name + "_spell_book", () -> new AddonSpellBook(config, spellTier, tier), false);
+        this.spellbook = AddonItemRegistry.register(name + "_spell_book", () -> new AddonSpellBook(config.spellbookConfig(), spellTier, tier), false);
     }
 
     public ArmorSetConfig getConfig() {
