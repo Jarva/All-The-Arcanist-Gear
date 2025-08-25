@@ -6,6 +6,7 @@ import com.github.jarva.allthearcanistgear.common.items.perks.FlightPerk;
 import com.github.jarva.allthearcanistgear.common.items.perks.SpectralSightPerk;
 import com.github.jarva.allthearcanistgear.common.items.perks.TruesightPerk;
 import com.github.jarva.allthearcanistgear.common.items.perks.VitalityPerk;
+import com.hollingsworth.arsnouveau.api.documentation.DocAssets;
 import com.hollingsworth.arsnouveau.api.perk.PerkSlot;
 import com.hollingsworth.arsnouveau.api.registry.PerkRegistry;
 import com.hollingsworth.arsnouveau.api.registry.SpellCasterRegistry;
@@ -18,13 +19,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ArsNouveauRegistry {
-    public static SpellTier SPELL_FOUR = SpellTier.createTier(AllTheArcanistGear.prefix("four"), 4);
-    public static SpellTier SPELL_FIVE = SpellTier.createTier(AllTheArcanistGear.prefix("five"), 5);
-    public static SpellTier SPELL_SIX = SpellTier.createTier(AllTheArcanistGear.prefix("six"), 6);
+    public static SpellTier SPELL_FOUR = SpellTier.createTier(AllTheArcanistGear.prefix("four"), 4, () -> DocAssets.TIER_THREE);
+    public static SpellTier SPELL_FIVE = SpellTier.createTier(AllTheArcanistGear.prefix("five"), 5, () -> DocAssets.TIER_THREE);
+    public static SpellTier SPELL_SIX = SpellTier.createTier(AllTheArcanistGear.prefix("six"), 6, () -> DocAssets.TIER_THREE);
 
-    public static final PerkSlot PERK_FOUR = new PerkSlot(AllTheArcanistGear.prefix( "four"), 4);
-    public static final PerkSlot PERK_FIVE = new PerkSlot(AllTheArcanistGear.prefix( "five"), 5);
-    public static final PerkSlot PERK_SIX = new PerkSlot(AllTheArcanistGear.prefix( "six"), 6);
+    public static final PerkSlot PERK_FOUR = registerPerkSlot( "four", 4);
+    public static final PerkSlot PERK_FIVE = registerPerkSlot( "five", 5);
+    public static final PerkSlot PERK_SIX = registerPerkSlot( "six", 6);
 
     public static void postInit() {
         addPerkSlots();
@@ -41,6 +42,12 @@ public class ArsNouveauRegistry {
             SpellCasterRegistry.register(spellBook, (stack) -> stack.get(AddonDataComponentRegistry.EXTENDED_GLYPH_CASTER));
         }
         SpellCasterRegistry.register(AddonItemRegistry.CREATIVE.get(), (stack) -> stack.get(AddonDataComponentRegistry.EXTENDED_GLYPH_CASTER));
+    }
+
+    private static PerkSlot registerPerkSlot(String name, int value) {
+        PerkSlot slot = new PerkSlot(AllTheArcanistGear.prefix(name), value);
+        PerkSlot.PERK_SLOTS.put(slot.id(), slot);
+        return slot;
     }
 
     private static void addPerkSlots() {
